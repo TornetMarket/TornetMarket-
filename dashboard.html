@@ -7,7 +7,8 @@
 
   <style>
     body {
-      background-color: #121212; /* Dark background color */
+      background: url("https://i.imgur.com/lScgeBj.jpg") no-repeat center center fixed;
+      background-size: cover; /* Ensure the background image covers the entire viewport */
       color: #fff; /* Text color */
       font-size: 2rem; /* Font size for the text */
       display: flex;
@@ -18,6 +19,7 @@
       margin: 0;
       height: 100vh; /* Full viewport height */
       position: relative; /* Position relative for absolute positioning of profile info */
+      overflow: hidden; /* Ensure no white gaps */
     }
 
     #clock {
@@ -42,7 +44,7 @@
     }
 
     #profileInfo a:hover {
-      color: #00f; /* Change color on hover to blue */
+      color: #0c8cbb; /* Change color on hover to blue */
     }
 
     #shopButton {

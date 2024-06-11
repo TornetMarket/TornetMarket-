@@ -62,6 +62,7 @@
     <a href="index.html">Logout</a>
   </div>
   <div id="clock"></div>
+  <button id="shopButton">Shop</button>
 
   <script>
     // Function to extract username from URL query parameter
@@ -102,6 +103,11 @@
 
     // Update time every second
     setInterval(updateTime, 1000);
+
+    // Event listener for shop button
+    document.getElementById('shopButton').addEventListener('click', function() {
+      window.open('https://discord.gg/tornetmarket', '_blank');
+    });
   </script>
 </body>
 </html>

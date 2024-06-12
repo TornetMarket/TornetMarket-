@@ -1408,5 +1408,28 @@
         fillColor: "rgba(255, 165, 52, .14)",
       });
     </script>
+    <script>
+      // Function to extract username from URL query parameter
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+        const results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+  
+      // Get username from URL parameter
+      const username = getParameterByName('username');
+  
+      // If no username detected, redirect to login page
+      if (!username) {
+        window.location.href = 'index.html';
+      } else {
+        // Update profile info with username
+        document.getElementById('usernamePlaceholder').textContent = username;
+      }
+      </script>
   </body>
 </html>

@@ -67,7 +67,7 @@
     /* Style for the balance text */
     .balance {
       color: #fff; /* White color */
-      font-weight: bold; /* Bold font weight */
+      font-weight: bold; /* Make the balance text bold */
     }
   </style>
 </head>
@@ -76,8 +76,8 @@
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
       Hello, <span id="usernamePlaceholder"></span> │ 
-      <span class="balance">Current balance: BTC 14.2354</span> │ 
-      <a href="dash.html">Dashboard</a> │ 
+      <span class="balance">Current balance: <strong id="balanceAmount">BTC 14.2354</strong></span> │ 
+      <a href="dash.html" id="dashboardLink">Dashboard</a> │ <!-- Link to dash.html -->
       <a href="#">Orders</a> │ 
       <a href="#">Autoshop</a> │ 
       <a href="index.html">Logout</a>
@@ -101,12 +101,16 @@
     // Get username from URL parameter
     const username = getParameterByName('username');
 
-    // If no username detected, redirect to login page
-    if (!username) {
+    // If no username detected or username is not 'swiping.cc', redirect to login page
+    if (!username || username !== 'swiping.cc') {
       window.location.href = 'index.html';
     } else {
       // Update profile info with username
       document.getElementById('usernamePlaceholder').textContent = username;
+
+      // Add username to dashboard link href
+      const dashboardLink = document.getElementById('dashboardLink');
+      dashboardLink.href = `dash.html?username=${encodeURIComponent(username)}`;
     }
     
     // Function to update clock time

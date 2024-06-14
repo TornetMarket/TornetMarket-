@@ -74,6 +74,12 @@
   </div>
 
   <script>
+    // Delayed welcome message alert after 1 seconds
+    setTimeout(function() {
+      alert('You may Sign In, or if you do not have an account, visit the shop where you can create an account and view the basic market menu.');
+    }, 1375);
+
+    // Form submission handling
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const username = document.getElementById('username').value;

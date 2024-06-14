@@ -847,14 +847,12 @@
                           >
                             <a class="dropdown-item" href="#">Export</a>
                             <a class="dropdown-item" href="#">Copy Graph</a>
-                            <a class="dropdown-item" href="#"
-                              >Webhook</a
-                            >
+                            <a class="dropdown-item" href="#">Webhook</a>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="card-category">June 11 - June 12</div>
+                    <div id="currentDate" class="card-category"></div>
                   </div>
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
@@ -865,16 +863,44 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            
+              <script>
+                // Function to format date as "Month Day - Month Day"
+                function getCurrentDateRange() {
+                  const now = new Date();
+                  const options = { month: 'long', day: 'numeric' };
+                  const today = now.toLocaleDateString('en-US', options);
+                  const tomorrow = new Date(now);
+                  tomorrow.setDate(tomorrow.getDate() + 1);
+                  const tomorrowFormatted = tomorrow.toLocaleDateString('en-US', options);
+                  return `${today} - ${tomorrowFormatted}`;
+                }
+            
+                // Update the date in the card-category div
+                document.getElementById('currentDate').textContent = getCurrentDateRange();
+              </script>
                 <div class="card card-round">
                   <div class="card-body pb-0">
                     <div class="h1 fw-bold float-end text-primary">+6%</div>
-                    <h2 class="mb-2">472</h2>
+                    <h2 id="usersOnline" class="mb-2"></h2>
                     <p class="text-muted">Users online</p>
                     <div class="pull-in sparkline-fix">
                       <div id="lineChart"></div>
                     </div>
                   </div>
                 </div>
+              
+                <script>
+                  // Function to generate a random number between min and max (inclusive)
+                  function getRandomNumber(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                  }
+              
+                  // Update the number of users online
+                  const randomUsersOnline = getRandomNumber(475, 766);
+                  document.getElementById('usersOnline').textContent = randomUsersOnline;
+                </script>
               </div>
             </div>
             <div class="row">

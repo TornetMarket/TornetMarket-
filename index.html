@@ -4,19 +4,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tornet Market ™ | Login</title>
+  <title>Tornet Market ™ | Home</title>
   <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <link
-      rel="icon"
-      href="assets\img\TornetMarketIcon.ico"
-      type="image/x-icon"
-    />
+    content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    name="viewport"
+  />
+  <link
+    rel="icon"
+    href="assets/img/TornetMarketIcon.ico"
+    type="image/x-icon"
+  />
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      position: relative; /* Ensure the profile info panel is positioned correctly */
+      color: #fff; /* Set text color to white */
+    }
+    #profileInfo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      text-align: right;
+      font-size: 1rem;
+      border: 2px solid #888; /* Gray border */
+      padding: 10px 20px; /* Padding */
+      border-radius: 10px; /* Rounded corners */
+      color: #fff; /* Ensure text color is white */
+    }
+
+    #profileInfo a {
+      color: #fff; /* Text color */
+      text-decoration: none; /* Remove underline */
+      margin-left: 10px; /* Add space between options */
+    }
+
+    #profileInfo a:hover {
+      color: #0c8cbb; /* Change color on hover to blue */
+    }
+  </style>
 </head>
 <body>
+  <div id="profileInfo">
+    Welcome to Tornet Market │ 
+    <a href="https://discord.gg/tornetmarket" target="_blank"><strong>Shop</strong></a>
+  </div>
   <div class="wrapper">
     <form id="loginForm">
       <h2>Login</h2>
@@ -41,6 +72,7 @@
       </div>
     </form>
   </div>
+
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();

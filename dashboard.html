@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tornet Market ™ | Home </title>
+  <title>Tornet Market ™ | Dashboard</title>
   <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -85,7 +85,7 @@
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
       Hello, <span id="usernamePlaceholder"></span> │ 
-      <span class="balance">Current balance: <strong id="balanceAmount">BTC 14.2354</strong></span> │ 
+      <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
       <a href="dash.html" id="dashboardLink">Dashboard</a> │ <!-- Link to dash.html -->
       <a href="#">Orders</a> │ 
       <a href="#">Autoshop</a> │ 
@@ -138,6 +138,20 @@
 
     // Update time every second
     setInterval(updateTime, 1000);
+
+    // Function to generate random BTC price
+    function generateRandomBTCPrice() {
+      const min = 8.1354;
+      const max = 32.1354;
+      const randomPrice = (Math.random() * (max - min) + min).toFixed(4);
+      document.getElementById('btcPrice').textContent = randomPrice;
+    }
+
+    // Initial call to generate random BTC price
+    generateRandomBTCPrice();
+
+    // Update BTC price every minute
+    setInterval(generateRandomBTCPrice, 300000); // 300,000 milliseconds = 5 minute
 
     // Event listener for shop button
     document.getElementById('shopButton').addEventListener('click', function() {

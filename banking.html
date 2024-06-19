@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tornet Market ™ | Wallet</title>
+  <link rel="icon" href="assets/img/TornetMarketIcon.ico" type="image/x-icon">
+
+  <style>
+    body {
+      background: url("https://i.imgur.com/lScgeBj.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-size: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #profileInfo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      text-align: right;
+      font-size: 1rem;
+      border: 2px solid #888;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    #profileInfo a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+
+    #profileInfo a:hover {
+      color: #0c8cbb;
+    }
+
+    .balance {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    #balanceAmount {
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    #balancePanel {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-top: 50px;
+      margin: 0 auto; /* Center the panel horizontally */
+      max-width: 80%; /* Limit maximum width of the panel */
+      position: relative; /* Ensure button is positioned relative to this container */
+    }
+
+    #balanceLabel {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #ddd;
+    }
+
+    #incomePanel {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-top: 20px; /* Adjusted margin */
+      margin-bottom: 20px; /* Added margin bottom */
+      margin: 0 auto; /* Center the panel horizontally */
+      max-width: 40%; /* Limit maximum width of the panel */
+      position: relative; /* Ensure button is positioned relative to this container */
+    }
+
+    #incomeLabel {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #ddd;
+    }
+
+    #addMoneyButton {
+      position: absolute;
+      top: 20px; /* Adjust as needed */
+      right: 20px; /* Adjust as needed */
+      color: #fff;
+      border: 2px solid #fff;
+      background-color: transparent;
+      padding: 8px 16px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #transactions {
+      margin-top: 20px; /* Adjust margin top as needed */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center items horizontally */
+    }
+
+    .transactionPanel {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-top: 20px;
+      width: 80%; /* Adjust width as needed */
+      max-width: 100%; /* Ensure panel does not exceed container width */
+      display: flex;
+      justify-content: space-between; /* Align items to the edges */
+      align-items: center; /* Center vertically */
+    }
+
+    .transactionName {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .transactionDescription {
+      font-size: 1rem;
+      color: #ccc;
+      margin-top: 5px;
+    }
+
+    .transactionAmount {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      text-align: center; /* Center the "Transactions" heading */
+      margin-bottom: 20px;
+      font-size: 1.8rem; /* Adjusted font size */
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>TORNET MARKET</h1>
+    <div id="profileInfo">
+      Hello, <span id="usernamePlaceholder"></span> │ 
+      <a href="dash.html" id="dashboardLink">Dashboard</a> │ 
+      <a href="#">Autoshop</a> │ 
+      <a href="index.html">Logout</a>
+    </div>
+    <div id="balancePanel">
+      <button id="addMoneyButton">+</button>
+      <div id="balanceLabel">Total Balance</div>
+      <div id="balanceAmount">$ 1,562.50</div>
+    </div>
+    <div id="transactions">
+      <h2>Transactions</h2>
+      <div class="transactionPanel">
+        <div>
+          <div class="transactionName">Amazon</div>
+          <div class="transactionDescription">Shopping</div>
+        </div>
+        <div class="transactionAmount">- $ 85.35</div>
+      </div>
+      <div class="transactionPanel">
+        <div>
+          <div class="transactionName">Apple</div>
+          <div class="transactionDescription">Applestore Purchase</div>
+        </div>
+        <div class="transactionAmount">- $ 15</div>
+      </div>
+      <div class="transactionPanel">
+        <div>
+          <div class="transactionName">Caliva</div>
+          <div class="transactionDescription">Cannabis Store</div>
+        </div>
+        <div class="transactionAmount">- $ 850</div>
+      </div>
+      <div class="transactionPanel">
+        <div>
+          <div class="transactionName">Bermuda Bank</div>
+          <div class="transactionDescription">Wire Transfer REF XJL839KNI29</div>
+        </div>
+        <div class="transactionAmount">- $ 100,000</div>
+      </div>
+      <div class="transactionPanel">
+        <div>
+          <div class="transactionName">Discord</div>
+          <div class="transactionDescription">Monthly Nitro Subscription</div>
+        </div>
+        <div class="transactionAmount">- $ 99.99</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to update balance amount randomly every 5 minutes
+    function updateBalanceAmount() {
+      const currentBalance = parseFloat(document.getElementById('balanceAmount').textContent.replace('$ ', '').replace(',', ''));
+      const randomIncrease = (Math.floor(Math.random() * (21000 - 6000 + 1)) + 6000) / 100; // Random amount between $60.00 and $210.00
+
+      const newBalance = currentBalance + randomIncrease;
+      document.getElementById('balanceAmount').textContent = `$ ${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+    }
+
+    // Initial update after 5 seconds (simulating page load)
+    setTimeout(function() {
+      updateBalanceAmount();
+      setInterval(updateBalanceAmount, 300000); // Update balance every 5 minutes (300,000 milliseconds)
+    }, 120000); // Start update after 2 minutes of page load
+
+    // Function to extract username from URL query parameter
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      const results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Get username from URL parameter
+    const username = getParameterByName('username');
+
+    // If no username detected or username is not 'swiping.cc', redirect to login page
+    if (!username || username !== 'swiping.cc') {
+      window.location.href = 'index.html';
+    } else {
+      // Update profile info with username
+      document.getElementById('usernamePlaceholder').textContent = username;
+
+      // Add username to dashboard link href
+      const dashboardLink = document.getElementById('dashboardLink');
+      dashboardLink.href = `dash.html?username=${encodeURIComponent(username)}`;
+    }
+  </script>
+</body>
+</html>

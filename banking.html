@@ -170,7 +170,7 @@
   <div>
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
-      Hello, <span id="usernamePlaceholder"></span> │ 
+      Hello, swiping.cc<span id="usernamePlaceholder"></span> │ 
       <a href="dash.html" id="dashboardLink">Dashboard</a> │ 
       <a href="#">Autoshop</a> │ 
       <a href="index.html">Logout</a>
@@ -213,7 +213,7 @@
       <div class="transactionPanel">
         <div>
           <div class="transactionName">Discord</div>
-          <div class="transactionDescription">Monthly Nitro Subscription</div>
+          <div class="transactionDescription">Monthly Subscription - Discord Nitro</div>
         </div>
         <div class="transactionAmount">- $ 99.99</div>
       </div>
@@ -235,32 +235,6 @@
       updateBalanceAmount();
       setInterval(updateBalanceAmount, 300000); // Update balance every 5 minutes (300,000 milliseconds)
     }, 120000); // Start update after 2 minutes of page load
-
-    // Function to extract username from URL query parameter
-    function getParameterByName(name, url) {
-      if (!url) url = window.location.href;
-      name = name.replace(/[\[\]]/g, '\\$&');
-      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      const results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-
-    // Get username from URL parameter
-    const username = getParameterByName('username');
-
-    // If no username detected or username is not 'swiping.cc', redirect to login page
-    if (!username || username !== 'swiping.cc') {
-      window.location.href = 'index.html';
-    } else {
-      // Update profile info with username
-      document.getElementById('usernamePlaceholder').textContent = username;
-
-      // Add username to dashboard link href
-      const dashboardLink = document.getElementById('dashboardLink');
-      dashboardLink.href = `dash.html?username=${encodeURIComponent(username)}`;
-    }
   </script>
 </body>
 </html>

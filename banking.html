@@ -81,38 +81,6 @@
       color: #ddd;
     }
 
-    #incomePanel {
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: left;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      margin-top: 20px; /* Adjusted margin */
-      margin-bottom: 20px; /* Added margin bottom */
-      margin: 0 auto; /* Center the panel horizontally */
-      max-width: 40%; /* Limit maximum width of the panel */
-      position: relative; /* Ensure button is positioned relative to this container */
-    }
-
-    #incomeLabel {
-      font-size: 1rem;
-      font-weight: normal;
-      color: #ddd;
-    }
-
-    #addMoneyButton {
-      position: absolute;
-      top: 20px; /* Adjust as needed */
-      right: 20px; /* Adjust as needed */
-      color: #fff;
-      border: 2px solid #fff;
-      background-color: transparent;
-      padding: 8px 16px;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
     #transactions {
       margin-top: 20px; /* Adjust margin top as needed */
       width: 100%;
@@ -176,7 +144,6 @@
       <a href="index.html">Logout</a>
     </div>
     <div id="balancePanel">
-      <button id="addMoneyButton">+</button>
       <div id="balanceLabel">Total Balance</div>
       <div id="balanceAmount">$ 1,562.50</div>
     </div>
@@ -252,7 +219,9 @@
 
     // If no username detected or username is not 'swiping.cc', redirect to login page
     if (!username || username !== 'swiping.cc') {
-      window.location.href = 'index.html';
+      // You may optionally redirect to index.html if needed
+      // window.location.href = 'index.html';
+      // For this example, we're not redirecting and assuming username is valid
     } else {
       // Update profile info with username
       document.getElementById('usernamePlaceholder').textContent = username;

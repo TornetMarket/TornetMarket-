@@ -22,6 +22,134 @@
       position: relative; /* Position relative for absolute positioning of profile info */
       overflow: hidden; /* Ensure no white gaps */
     }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tornet Market ™ | Dashboard</title>
+  <link rel="icon" href="assets/img/TornetMarketIcon.ico" type="image/x-icon">
+
+  <style>
+    body {
+      background: url("https://i.imgur.com/lScgeBj.jpg") no-repeat center center fixed;
+      background-size: cover; /* Ensure the background image covers the entire viewport */
+      color: #fff; /* Text color */
+      font-size: 2rem; /* Font size for the text */
+      display: flex;
+      flex-direction: column; /* To align clock beneath Tornet Market heading */
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+      height: 100vh; /* Full viewport height */
+      position: relative; /* Position relative for absolute positioning of profile info */
+      overflow: hidden; /* Ensure no white gaps */
+    }
+
+    #clock {
+      font-size: 1.5rem; /* Adjust clock font size */
+    }
+
+    #profileInfo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      text-align: right;
+      font-size: 1rem;
+      border: 2px solid #888; /* Gray border */
+      padding: 10px 20px; /* Padding */
+      border-radius: 10px; /* Rounded corners */
+    }
+
+    #profileInfo a {
+      color: #fff; /* Text color */
+      text-decoration: none; /* Remove underline */
+      margin-left: 10px; /* Add space between options */
+    }
+
+    #profileInfo a:hover {
+      color: #0c8cbb; /* Change color on hover to blue */
+    }
+
+    #shopButton {
+      margin-top: 20px; /* Add some space between clock and button */
+      background-color: transparent; /* Transparent background color */
+      color: #fff; /* Text color */
+      border: 1px solid #fff; /* Thin white border */
+      padding: 10px 20px; /* Padding */
+      font-size: 1rem; /* Font size */
+      cursor: pointer; /* Add cursor pointer */
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+    #shopButton:hover {
+      background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white on hover */
+      border-color: #fff; /* White border on hover */
+      color: #fff; /* Text color on hover */
+    }
+    
+    /* Style for the balance text */
+    .balance {
+      color: #fff; /* White color */
+      font-weight: bold; /* Make the balance text bold */
+    }
+  </style>
+</head>
+<body>
+  <div style="text-align: center;">
+    <h1>TORNET MARKET</h1>
+    <div id="profileInfo">
+      Hello, <span id="usernamePlaceholder"></span> │ 
+      <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
+      <a href="dash.html" id="dashboardLink">Dashboard</a> │ 
+      <a href="banking.html" id="walletLink">Wallet</a> │ 
+      <a href="#">Autoshop</a> │ 
+      <a href="index.html">Logout</a>
+    </div>
+    <div id="clock"></div>
+    <button id="shopButton">Shop</button>
+  </div>
+
+  <script>
+    // Function to update clock time
+    function updateTime() {
+      const now = new Date();
+      let hours = now.getHours();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12; // Convert to 12-hour format
+      const minutes = now.getMinutes().toString().padStart(2, '0'); // Add leading zero if needed
+      const seconds = now.getSeconds().toString().padStart(2, '0'); // Add leading zero if needed
+
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+    }
+
+    updateTime(); // Initial call to display time immediately
+
+    // Update time every second
+    setInterval(updateTime, 1000);
+
+    // Function to generate random BTC price
+    function generateRandomBTCPrice() {
+      const min = 8.1354;
+      const max = 32.1354;
+      const randomPrice = (Math.random() * (max - min) + min).toFixed(4);
+      document.getElementById('btcPrice').textContent = randomPrice;
+    }
+
+    // Initial call to generate random BTC price
+    generateRandomBTCPrice();
+
+    // Update BTC price every minute
+    setInterval(generateRandomBTCPrice, 300000); // 300,000 milliseconds = 5 minute
+
+    // Event listener for shop button
+    document.getElementById('shopButton').addEventListener('click', function() {
+      window.open('https://discord.gg/tornetmarket', '_blank');
+    });
+  </script>
+</body>
+</html>
 
     #clock {
       font-size: 1.5rem; /* Adjust clock font size */

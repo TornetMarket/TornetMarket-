@@ -18,9 +18,10 @@
       align-items: center;
       padding: 20px;
       margin: 0;
-      height: 100vh;
+      min-height: 100vh; /* Ensure minimum height to cover viewport */
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden; /* Hide horizontal overflow */
+      overflow-y: auto; /* Enable vertical scrollbar when content exceeds viewport */
     }
 
     #profileInfo {
@@ -362,7 +363,7 @@
           <p>CARD NUMBER</p>
           <h3>•••• 8304</h3>
           <p>EXPIRY   CCV</p>
-          <h3>03/25   463</h3>
+          <h3>03/26   977</h3>
         </div>
       </div>
       <!-- Add more card divs as needed -->
@@ -388,3 +389,5 @@
   </script>
 </body>
 </html>
+
+

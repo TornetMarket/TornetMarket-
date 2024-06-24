@@ -836,7 +836,7 @@
                             class="btn btn-sm btn-label-light dropdown-toggle"
                             type="button"
                             id="dropdownMenuButton"
-                            data-bs-toggle="dropdown"
+                            data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false"
                           >
@@ -857,7 +857,7 @@
                   </div>
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
-                      <h1>$2,550.00</h1>
+                      <h1 id="dailySalesAmount">$13,785.00</h1>
                     </div>
                     <div class="pull-in">
                       <canvas id="dailySalesChart"></canvas>
@@ -865,6 +865,44 @@
                   </div>
                 </div>
               </div>
+
+              <script>
+                // Function to generate a random number between min (inclusive) and max (inclusive)
+                function getRandomNumber(min, max) {
+                  return Math.random() * (max - min) + min;
+                }
+            
+                // Function to update daily sales amount with a random increase
+                function updateDailySalesAmount() {
+                  const currentAmountElement = document.getElementById('dailySalesAmount');
+                  let currentAmount = parseFloat(currentAmountElement.textContent.replace('$', '').replace(',', ''));
+            
+                  // Generate a random increase between $120.00 and $460.00
+                  const randomIncrease = getRandomNumber(120, 460);
+            
+                  // Update current amount
+                  currentAmount += randomIncrease;
+            
+                  // Update DOM with formatted amount
+                  currentAmountElement.textContent = `$ ${currentAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+                }
+            
+                // Function to initialize daily sales amount randomly
+                function initializeDailySalesAmount() {
+                  const currentAmountElement = document.getElementById('dailySalesAmount');
+                  const initialAmount = getRandomNumber(12350, 18865);
+                  currentAmountElement.textContent = `$ ${initialAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+                }
+            
+                // Initialize daily sales amount when the page loads
+                document.addEventListener('DOMContentLoaded', function() {
+                  initializeDailySalesAmount();
+            
+                  // Update daily sales amount every 12 minutes
+                  setInterval(updateDailySalesAmount, 12 * 60 * 1000); // 12 minutes in milliseconds
+                });
+              </script>
+
             
               <script>
                 // Function to format date as "Month Day - Month Day"

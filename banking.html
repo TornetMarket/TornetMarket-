@@ -557,10 +557,16 @@
   // Function to update the current time every second
   function updateTime() {
     const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
+    let hours = now.getHours();
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');
-    const timeString = `${hours}:${minutes}:${seconds}`;
+    let period = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert hours to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Handle midnight (0 hours)
+
+    const timeString = `${hours}:${minutes}:${seconds} ${period}`;
     document.getElementById('dashboardTime').textContent = timeString;
   }
 

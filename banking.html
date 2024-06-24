@@ -157,12 +157,41 @@
 
     h1 {
       margin-bottom: 20px;
+      text-align: center;
+      font-size: 3rem; /* Default font size */
     }
 
     h2 {
       text-align: center; /* Center the "Transactions" heading */
       margin-bottom: 20px;
       font-size: 1.8rem; /* Adjusted font size */
+    }
+
+    /* Media Queries */
+    @media (max-width: 1200px) {
+      h1 {
+        font-size: 2.5rem; /* Adjust font size for tablets */
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem; /* Adjust font size for smaller tablets */
+      }
+
+      #balancePanel, #incomePanel, .transactionPanel {
+        max-width: 90%; /* Adjust width for smaller screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem; /* Adjust font size for mobile phones */
+      }
+
+      #balancePanel, #incomePanel, .transactionPanel {
+        max-width: 95%; /* Adjust width for mobile phones */
+      }
     }
   </style>
 </head>

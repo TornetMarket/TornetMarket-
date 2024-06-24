@@ -21,6 +21,7 @@
       height: 100vh;
       position: relative;
       overflow: hidden;
+      overflow-y: auto; /* Add scrollbar when content exceeds viewport */
     }
 
     #profileInfo {
@@ -204,7 +205,65 @@
 
       #balancePanel, #incomePanel, .transactionPanel {
         max-width: 95%; /* Adjust width for mobile phones */
+        padding: 10px; /* Reduce padding for mobile */
       }
+
+      .transactionPanel {
+        padding: 15px; /* Adjust padding for mobile */
+      }
+
+      .transactionAmount {
+        font-size: 1rem; /* Reduce font size for mobile */
+      }
+
+      .transactionName, .transactionDescription, .transactionDate {
+        font-size: 1rem; /* Adjust font size for mobile */
+      }
+    }
+
+    #cardsSection {
+      margin-top: 20px; /* Adjust as needed */
+      width: 100%;
+      text-align: center; /* Center the heading */
+    }
+
+    #cardsContainer {
+      display: flex;
+      justify-content: center; /* Center cards horizontally */
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 20px 0;
+    } 
+
+    .card {
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin: 0 10px; /* Adjust spacing between cards */
+      min-width: 250px; /* Ensure a minimum width for each card */
+      flex: 0 0 auto; /* Prevent cards from shrinking */
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .cardInfo {
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    .cardInfo h3 {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    .cardInfo p {
+      font-size: 1rem;
+      color: #ccc;
     }
   </style>
 </head>
@@ -220,7 +279,7 @@
     <div id="balancePanel">
       <button id="addMoneyButton">+</button>
       <div id="balanceLabel">Total Balance</div>
-      <div id="balanceAmount">$ 1,562.50</div>
+      <div id="balanceAmount">$ 47,392.95</div>
     </div>
     <div id="transactions">
       <h2>Transactions</h2>
@@ -260,7 +319,7 @@
         <div class="transactionDetails">
           <div class="transactionName">Discord</div>
           <div class="transactionDescription">Monthly Subscription - Discord Nitro</div>
-          <div class="transactionDate">05/2</div>
+          <div class="transactionDate">04/24</div>
         </div>
         <div class="transactionAmount">- $ 99.99</div>
       </div>
@@ -268,12 +327,49 @@
         <div class="transactionDetails">
           <div class="transactionName">Bermuda Bank</div>
           <div class="transactionDescription">Wire Transfer REF YTZ482PQM74</div>
-          <div class="transactionDate">05/19</div>
+          <div class="transactionDate">04/19</div>
         </div>
         <div class="transactionAmount">- $ 250,000</div>
       </div>
     </div>
   </div>
+  <div id="cardsSection">
+    <h2>Cards</h2>
+    <div id="cardsContainer">
+      <div class="card">
+        <div class="cardInfo">
+          <p>BALANCE</p>
+          <h3>$ 1,256.90</h3>
+          <p>CARD NUMBER</p>
+          <h3>•••• 9905</h3>
+          <p>EXPIRY   CCV</p>
+          <h3>12/25   553</h3>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardInfo">
+          <p>BALANCE</p>
+          <h3>$ 3,256.90</h3>
+          <p>CARD NUMBER</p>
+          <h3>•••• 4563</h3>
+          <p>EXPIRY   CCV</p>
+          <h3>09/25   463</h3>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardInfo">
+          <p>BALANCE</p>
+          <h3>$ 1,756.47</h3>
+          <p>CARD NUMBER</p>
+          <h3>•••• 8304</h3>
+          <p>EXPIRY   CCV</p>
+          <h3>03/26   977</h3>
+        </div>
+      </div>
+      <!-- Add more card divs as needed -->
+    </div>
+  </div>
+  
 
   <script>
     // Function to update balance amount randomly every 5 minutes
@@ -282,7 +378,7 @@
       const randomIncrease = (Math.floor(Math.random() * (21000 - 6000 + 1)) + 6000) / 100; // Random amount between $60.00 and $210.00
 
       const newBalance = currentBalance + randomIncrease;
-      document.getElementById('balanceAmount').textContent = `$ ${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+      document.getElementById('balanceAmount').textContent = $ ${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')};
     }
 
     // Initial update after 5 seconds (simulating page load)

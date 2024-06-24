@@ -235,36 +235,80 @@
       padding: 20px 0;
     } 
 
+    .card:nth-child(1) {
+      background-color: #0c8cbb; /* Blue */
+    }
+
+    .card:nth-child(2) {
+      background-color: #444; /* Dark Gray */
+    }
+
+    .card:nth-child(3) {
+    background-color: #666; /* Light Gray */
+    }
+
     .card {
-      background: rgba(0, 0, 0, 0.9);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      margin: 0 10px; /* Adjust spacing between cards */
-      min-width: 250px; /* Ensure a minimum width for each card */
-      flex: 0 0 auto; /* Prevent cards from shrinking */
-    }
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 0 10px; /* Adjust spacing between cards */
+  width: 320px; /* Increase width for each card */
+  height: 180px; /* Maintain fixed height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative; /* Ensure button positioning relative to card */
+}
 
-    .card img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
+.cardOptionsButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 
-    .cardInfo {
-      margin-top: 10px;
-      color: #fff;
-    }
+.cardOptionsButton::before,
+.cardOptionsButton::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  width: 5px;
+  height: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-    .cardInfo h3 {
-      font-size: 1.5rem;
-      margin: 10px 0;
-    }
+.cardOptionsButton::before {
+  margin-left: -8px;
+}
 
-    .cardInfo p {
-      font-size: 1rem;
-      color: #ccc;
-    }
+.cardOptionsButton::after {
+  margin-left: 3px;
+}
+
+.cardInfo {
+  color: #fff;
+}
+
+.cardInfo h3 {
+  font-size: 1.5rem;
+  margin: 5px 0;
+}
+
+.cardInfo p {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.7;
+}
+
   </style>
 </head>
 <body>
@@ -310,7 +354,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Bermuda Bank</div>
-          <div class="transactionDescription">Wire Transfer REF XJL839KNI29</div>
+          <div class="transactionDescription">Wire Transfer</div>
           <div class="transactionDate">05/19</div>
         </div>
         <div class="transactionAmount">- $ 100,000</div>
@@ -318,7 +362,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Discord</div>
-          <div class="transactionDescription">Monthly Subscription - Discord Nitro</div>
+          <div class="transactionDescription">Discord Nitro</div>
           <div class="transactionDate">04/24</div>
         </div>
         <div class="transactionAmount">- $ 99.99</div>
@@ -326,7 +370,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Bermuda Bank</div>
-          <div class="transactionDescription">Wire Transfer REF YTZ482PQM74</div>
+          <div class="transactionDescription">Wire Transfer</div>
           <div class="transactionDate">04/19</div>
         </div>
         <div class="transactionAmount">- $ 250,000</div>
@@ -337,6 +381,7 @@
     <h2>Cards</h2>
     <div id="cardsContainer">
       <div class="card">
+        <button class="cardOptionsButton"></button>
         <div class="cardInfo">
           <p>BALANCE</p>
           <h3>$ 1,256.90</h3>
@@ -347,6 +392,7 @@
         </div>
       </div>
       <div class="card">
+        <button class="cardOptionsButton"></button>
         <div class="cardInfo">
           <p>BALANCE</p>
           <h3>$ 3,256.90</h3>
@@ -357,6 +403,7 @@
         </div>
       </div>
       <div class="card">
+        <button class="cardOptionsButton"></button>
         <div class="cardInfo">
           <p>BALANCE</p>
           <h3>$ 1,756.47</h3>
@@ -370,6 +417,9 @@
     </div>
   </div>
   
+  </div>
+  
+  
 
   <script>
     // Function to update balance amount randomly every 5 minutes
@@ -381,11 +431,27 @@
       document.getElementById('balanceAmount').textContent = `$ ${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
     }
 
-    // Initial update after 5 seconds (simulating page load)
+    // Function to update card prices randomly every 30 minutes
+    function updateCardPrices() {
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const currentPrice = parseFloat(card.querySelector('h3').textContent.replace('$ ', '').replace(',', ''));
+        const randomIncrease = (Math.floor(Math.random() * (83000 - 25075 + 1)) + 25075) / 100; // Random amount between $250.75 and $830.00
+
+        const newPrice = currentPrice + randomIncrease;
+        card.querySelector('h3').textContent = `$ ${newPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+      });
+    }
+
+    // Initial update after 2 minutes (simulating page load)
     setTimeout(function() {
       updateBalanceAmount();
       setInterval(updateBalanceAmount, 300000); // Update balance every 5 minutes (300,000 milliseconds)
-    }, 120000); // Start update after 2 minutes of page load
+
+      updateCardPrices();
+      setInterval(updateCardPrices, 1800000); // Update card prices every 30 minutes (1,800,000 milliseconds)
+    }, 120000); // Start updates after 2 minutes of page load
   </script>
 </body>
 </html>

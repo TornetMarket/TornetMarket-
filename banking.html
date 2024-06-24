@@ -18,10 +18,9 @@
       align-items: center;
       padding: 20px;
       margin: 0;
-      min-height: 100vh; /* Ensure minimum height to cover viewport */
+      height: 100vh;
       position: relative;
-      overflow-x: hidden; /* Hide horizontal overflow */
-      overflow-y: auto; /* Enable vertical scrollbar when content exceeds viewport */
+      overflow-y: auto; /* Add scrollbar when content exceeds viewport */
     }
 
     #profileInfo {
@@ -235,48 +234,36 @@
       padding: 20px 0;
     } 
 
-    .card:nth-child(1) {
-    background-color: #0c8cbb; /* Blue */
-    }
-
-    .card:nth-child(2) {
-      background-color: #444; /* Dark Gray */
-    }
-
-    .card:nth-child(3) {
-    background-color: #666; /* Light Gray */
-    }
-
     .card {
       background: rgba(0, 0, 0, 0.9);
       border-radius: 15px;
       padding: 20px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      margin: 0 10px 20px; /* Adjust spacing between cards */
-      width: 280px; /* Set fixed width for each card */
-      height: 150px; /* Set fixed height for each card */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      margin: 0 10px; /* Adjust spacing between cards */
+      min-width: 250px; /* Ensure a minimum width for each card */
+      flex: 0 0 auto; /* Prevent cards from shrinking */
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 10px;
     }
 
     .cardInfo {
+      margin-top: 10px;
       color: #fff;
     }
 
     .cardInfo h3 {
       font-size: 1.5rem;
-      margin: 5px 0;
+      margin: 10px 0;
     }
 
     .cardInfo p {
       font-size: 1rem;
-      margin: 0;
-      opacity: 0.7;
+      color: #ccc;
     }
-
-
   </style>
 </head>
 <body>
@@ -322,7 +309,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Bermuda Bank</div>
-          <div class="transactionDescription">Wire Transfer</div>
+          <div class="transactionDescription">Wire Transfer REF XJL839KNI29</div>
           <div class="transactionDate">05/19</div>
         </div>
         <div class="transactionAmount">- $ 100,000</div>
@@ -330,7 +317,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Discord</div>
-          <div class="transactionDescription">Discord Nitro</div>
+          <div class="transactionDescription">Monthly Subscription - Discord Nitro</div>
           <div class="transactionDate">04/24</div>
         </div>
         <div class="transactionAmount">- $ 99.99</div>
@@ -338,7 +325,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Bermuda Bank</div>
-          <div class="transactionDescription">Wire Transfer</div>
+          <div class="transactionDescription">Wire Transfer REF YTZ482PQM74</div>
           <div class="transactionDate">04/19</div>
         </div>
         <div class="transactionAmount">- $ 250,000</div>
@@ -375,7 +362,7 @@
           <p>CARD NUMBER</p>
           <h3>•••• 8304</h3>
           <p>EXPIRY   CCV</p>
-          <h3>03/26   977</h3>
+          <h3>03/25   463</h3>
         </div>
       </div>
       <!-- Add more card divs as needed -->
@@ -393,30 +380,11 @@
       document.getElementById('balanceAmount').textContent = `$ ${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
     }
 
-    // Function to update card prices randomly every 30 minutes
-    function updateCardPrices() {
-      const cards = document.querySelectorAll('.card');
-
-      cards.forEach(card => {
-        const currentPrice = parseFloat(card.querySelector('h3').textContent.replace('$ ', '').replace(',', ''));
-        const randomIncrease = (Math.floor(Math.random() * (83000 - 25075 + 1)) + 25075) / 100; // Random amount between $250.75 and $830.00
-
-        const newPrice = currentPrice + randomIncrease;
-        card.querySelector('h3').textContent = `$ ${newPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
-      });
-    }
-
-    // Initial update after 2 minutes (simulating page load)
+    // Initial update after 5 seconds (simulating page load)
     setTimeout(function() {
       updateBalanceAmount();
       setInterval(updateBalanceAmount, 300000); // Update balance every 5 minutes (300,000 milliseconds)
-
-      updateCardPrices();
-      setInterval(updateCardPrices, 1800000); // Update card prices every 30 minutes (1,800,000 milliseconds)
-    }, 120000); // Start updates after 2 minutes of page load
+    }, 120000); // Start update after 2 minutes of page load
   </script>
-</body>
-</html>
-
 </body>
 </html>

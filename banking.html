@@ -7,6 +7,39 @@
   <link rel="icon" href="assets/img/TornetMarketIcon.ico" type="image/x-icon">
 
   <style>
+
+    /* Popup styling */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    .popup.active {
+      display: block;
+    }
+
+    .popup-message {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .popup-close {
+      cursor: pointer;
+      color: #0c8cbb;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+
     body {
       background: url("https://i.imgur.com/lScgeBj.jpg") no-repeat center center fixed;
       background-size: cover;
@@ -318,6 +351,10 @@
       <div id="balanceLabel">Total Balance</div>
       <div id="balanceAmount">$ 47,392.95</div>
     </div>
+    <div id="popupMessage" class="popup">
+      <p class="popup-message">⚠️Your account is currently locked. Make sure to unlock your account before trying to transfer currencies.⚠️</p>
+      <span id="closePopup" class="popup-close">Close</span>
+    </div>
     <div id="transactions">
       <h2>Transactions</h2>
       <div class="transactionPanel">
@@ -492,5 +529,29 @@
     }, 1000); // Start updates after 1 second of page load
   </script>
   
+  <script>
+    // Function to show popup message
+    function showPopup() {
+      const popup = document.getElementById('popupMessage');
+      popup.classList.add('active');
+    }
+
+    // Function to close popup message
+    function closePopup() {
+      const popup = document.getElementById('popupMessage');
+      popup.classList.remove('active');
+    }
+
+    // Event listener for the add money button
+    document.getElementById('addMoneyButton').addEventListener('click', function() {
+      showPopup();
+    });
+
+    // Event listener for the close popup link
+    document.getElementById('closePopup').addEventListener('click', function() {
+      closePopup();
+    });
+  </script>
+
 </body>
 </html>

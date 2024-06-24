@@ -246,6 +246,18 @@
       flex: 0 0 auto; /* Prevent cards from shrinking */
     }
 
+    .card-blue {
+      background: rgba(0, 0, 255, 0.6); /* Blue background */
+    }
+
+    .card-lightgray {
+      background: rgba(94, 93, 93, 0.6); /* Dark gray background */
+    }
+
+    .card-darkgray {
+      background: rgba(50, 50, 50, 0.6); /* Dark gray background */
+    }
+
     .card img {
       max-width: 100%;
       border-radius: 10px;
@@ -310,7 +322,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Bermuda Bank</div>
-          <div class="transactionDescription">Wire Transfer REF XJL839KNI29</div>
+          <div class="transactionDescription">Wire Transfer</div>
           <div class="transactionDate">05/19</div>
         </div>
         <div class="transactionAmount">- $ 100,000</div>
@@ -318,7 +330,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Discord</div>
-          <div class="transactionDescription">Monthly Subscription - Discord Nitro</div>
+          <div class="transactionDescription">Discord Nitro</div>
           <div class="transactionDate">04/24</div>
         </div>
         <div class="transactionAmount">- $ 99.99</div>
@@ -326,7 +338,7 @@
       <div class="transactionPanel">
         <div class="transactionDetails">
           <div class="transactionName">Bermuda Bank</div>
-          <div class="transactionDescription">Wire Transfer REF YTZ482PQM74</div>
+          <div class="transactionDescription">Wire Transfer</div>
           <div class="transactionDate">04/19</div>
         </div>
         <div class="transactionAmount">- $ 250,000</div>
@@ -336,7 +348,7 @@
   <div id="cardsSection">
     <h2>Cards</h2>
     <div id="cardsContainer">
-      <div class="card">
+      <div class="card card-blue">
         <div class="cardInfo">
           <p>BALANCE</p>
           <h3>$ 1,256.90</h3>
@@ -346,7 +358,7 @@
           <h3>12/25   553</h3>
         </div>
       </div>
-      <div class="card">
+      <div class="card card-lightgray">
         <div class="cardInfo">
           <p>BALANCE</p>
           <h3>$ 3,256.90</h3>
@@ -356,12 +368,12 @@
           <h3>09/25   463</h3>
         </div>
       </div>
-      <div class="card">
+      <div class="card card-darkgray">
         <div class="cardInfo">
           <p>BALANCE</p>
           <h3>$ 1,756.47</h3>
           <p>CARD NUMBER</p>
-          <h3>•••• 8304</h3>
+          <h3>•••• 8304</p>
           <p>EXPIRY   CCV</p>
           <h3>03/26   977</h3>
         </div>
@@ -378,7 +390,7 @@
       const randomIncrease = (Math.floor(Math.random() * (21000 - 6000 + 1)) + 6000) / 100; // Random amount between $60.00 and $210.00
 
       const newBalance = currentBalance + randomIncrease;
-      document.getElementById('balanceAmount').textContent = $ ${newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')};
+      document.getElementById('balanceAmount').textContent = "$ " + newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     // Initial update after 5 seconds (simulating page load)
@@ -389,5 +401,3 @@
   </script>
 </body>
 </html>
-
-

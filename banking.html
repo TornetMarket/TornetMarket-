@@ -342,7 +342,7 @@
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
       Hello, swiping.cc<span id="usernamePlaceholder"></span> │ 
-      <a href="dash.html" id="dashboardLink">Dashboard</a> │ 
+      <span id="dashboardTime"></span> │ 
       <a href="#">Autoshop</a> │ 
       <a href="index.html">Logout</a>
     </div>
@@ -552,6 +552,24 @@
       closePopup();
     });
   </script>
+
+<script>
+  // Function to update the current time every second
+  function updateTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('dashboardTime').textContent = timeString;
+  }
+
+  // Update current time every second
+  setInterval(updateTime, 1000); // 1 second in milliseconds
+
+  // Call updateTime() once immediately to initialize the clock
+  updateTime();
+</script>
 
 </body>
 </html>

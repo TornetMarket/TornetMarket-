@@ -104,7 +104,7 @@
 </head>
 <body>
   <div style="text-align: center;">
-    <h1 style="font-size: 2rem;">TORNET MARKET</h1> <!-- Adjusted font size for heading -->
+    <h1 style="font-size: 3rem;">TORNET MARKET</h1> <!-- Adjusted font size for heading -->
     <div id="profileInfo">
       Hello, swiping.cc <span id="usernamePlaceholder"></span> │ 
       <span id="clock"></span> │ 
@@ -140,40 +140,55 @@
   </div>
 
   <script>
-    function getParameterByName(name, url) {
-      if (!url) url = window.location.href;
-      name = name.replace(/[\[\]]/g, '\\$&');
-      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      const results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('fillButtonUpdates').onclick = function() {
+        document.getElementById('discordMessageUpdates').value = "🧙 Hello Tornet Market! Thank you for being in our community!";
+      }
 
-    const username = getParameterByName('username');
+      document.getElementById('sendButtonUpdates').onclick = function() {
+        const message = document.getElementById('discordMessageUpdates').value;
+        if (message) {
+          const webhookUrl = "https://discord.com/api/webhooks/1236748826120032377/k79hULELizRtsd85U6wADhClhbqpsnZh0irdjyf20oxaoxLfHUS7SH8HyL2yC5OvQddO";
+          sendMessageToDiscord(message, webhookUrl);
+        } else {
+          alert("Please enter a message.");
+        }
+      }
 
-    function updateTime() {
-      const now = new Date();
-      let hours = now.getHours();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const seconds = now.getSeconds().toString().padStart(2, '0');
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-    }
+      document.getElementById('clearButtonUpdates').onclick = function() {
+        document.getElementById('discordMessageUpdates').value = '';
+      }
 
-    updateTime();
-    setInterval(updateTime, 1000);
+      document.getElementById('fillButtonTransactions').onclick = function() {
+        document.getElementById('discordMessageTransactions').value = "💲 Tornet Market ™ : You spent $9.10 at La Dolce Vita Gelato.";
+      }
 
-    function generateRandomBTCPrice() {
-      const min = 8.1354;
-      const max = 32.1354;
-      const randomPrice = (Math.random() * (max - min) + min).toFixed(4);
-      document.getElementById('btcPrice').textContent = randomPrice;
-    }
+      document.getElementById('sendButtonTransactions').onclick = function() {
+        const message = document.getElementById('discordMessageTransactions').value;
+        if (message) {
+          const webhookUrl = "https://discord.com/api/webhooks/1255007291263029278/Q1Zj-tK-KUwyiwygqaMj7_5J3Qn_fbA-0mS00gXSXRAZhLVtHjeeSTCZKZ4P0GkdSZpP";
+          sendMessageToDiscord(message, webhookUrl);
+        } else {
+          alert("Please enter a message.");
+        }
+      }
 
-    generateRandomBTCPrice();
-    setInterval(generateRandomBTCPrice, 300000);
+      document.getElementById('clearButtonTransactions').onclick = function() {
+        document.getElementById('discordMessageTransactions').value = '';
+      }
+
+      document.getElementById('chooseFileButton').onclick = function() {
+        document.getElementById('fileInput').click();
+      }
+
+      document.getElementById('fileInput').onchange = function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          document.getElementById('fileName').value = file.name;
+          uploadFileToDiscord(file);
+        }
+      }
+    });
 
     function sendMessageToDiscord(message, webhookUrl) {
       const payload = {
@@ -200,54 +215,6 @@
       });
     }
 
-    document.getElementById('fillButtonUpdates').onclick = function() {
-      document.getElementById('discordMessageUpdates').value = "🧙 Hello Tornet Market! Thank you for being in our community!";
-    }
-
-    document.getElementById('sendButtonUpdates').onclick = function() {
-      const message = document.getElementById('discordMessageUpdates').value;
-      if (message) {
-        const webhookUrl = "https://discord.com/api/webhooks/1236748826120032377/k79hULELizRtsd85U6wADhClhbqpsnZh0irdjyf20oxaoxLfHUS7SH8HyL2yC5OvQddO";
-        sendMessageToDiscord(message, webhookUrl);
-      } else {
-        alert("Please enter a message.");
-      }
-    }
-
-    document.getElementById('clearButtonUpdates').onclick = function() {
-      document.getElementById('discordMessageUpdates').value = '';
-    }
-
-    document.getElementById('fillButtonTransactions').onclick = function() {
-      document.getElementById('discordMessageTransactions').value = "💲 Tornet Market ™ : You spent $9.10 at La Dolce Vita Gelato.";
-    }
-
-    document.getElementById('sendButtonTransactions').onclick = function() {
-      const message = document.getElementById('discordMessageTransactions').value;
-      if (message) {
-        const webhookUrl = "https://discord.com/api/webhooks/1255007291263029278/Q1Zj-tK-KUwyiwygqaMj7_5J3Qn_fbA-0mS00gXSXRAZhLVtHjeeSTCZKZ4P0GkdSZpP";
-        sendMessageToDiscord(message, webhookUrl);
-      } else {
-        alert("Please enter a message.");
-      }
-    }
-
-    document.getElementById('clearButtonTransactions').onclick = function() {
-      document.getElementById('discordMessageTransactions').value = '';
-    }
-
-    document.getElementById('chooseFileButton').onclick = function() {
-      document.getElementById('fileInput').click();
-    }
-
-    document.getElementById('fileInput').onchange = function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        document.getElementById('fileName').value = file.name;
-        uploadFileToDiscord(file);
-      }
-    }
-
     function uploadFileToDiscord(file) {
       const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
       const formData = new FormData();
@@ -269,6 +236,20 @@
         alert("Error uploading file.");
       });
     }
+  </script>
+  <script>
+    function updateTime() {
+      const now = new Date();
+      let hours = now.getHours();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>

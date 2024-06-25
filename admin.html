@@ -14,7 +14,7 @@
       font-size: 2rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       padding: 20px;
       margin: 0;
@@ -61,14 +61,16 @@
       border-radius: 10px;
       text-align: center;
       margin-top: 20px;
+      width: 100%; /* Ensure panels take full width */
+      box-sizing: border-box; /* Include padding and border in width */
     }
 
-    .panel h2 {
+    .panel h3 {
       margin-bottom: 10px;
     }
 
     .panel input[type="text"] {
-      width: 100%;
+      width: calc(100% - 20px); /* Adjust width for padding */
       padding: 10px;
       margin: 10px 0;
       box-sizing: border-box;
@@ -97,62 +99,34 @@
       background-color: #005f8a;
     }
 
-    /* Default font size for the heading */
-h1 {
-  font-size: 3rem;
-  margin-top: 60px; /* Add margin to the top to ensure it doesn't interfere with the header buttons */
-}
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+      }
 
-/* Adjust font size for smaller screens */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-    margin-top: 50px; /* Adjust margin for smaller screens */
-  }
-}
+      h1 {
+        font-size: 2rem; /* Adjust header font size */
+      }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 2rem;
-    margin-top: 40px; /* Adjust margin for smaller screens */
-  }
-}
-
-/* Additional styles to ensure header buttons are not interfered with */
-#profileInfo {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  text-align: right;
-  font-size: 1rem;
-  border: 2px solid #888;
-  padding: 10px 20px;
-  border-radius: 10px;
-  z-index: 1000; /* Ensure the header is above other elements */
-}
-
-#profileInfo a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 10px;
-}
-
-#profileInfo a:hover {
-  color: #0c8cbb;
-}
-
-
+      #profileInfo {
+        position: static;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
   <div style="text-align: center;">
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
-      Hello, swiping.cc<span id="usernamePlaceholder"></span> │ 
-      <span id="dashboardTime"></span> │ 
+      Hello, swiping.cc <span id="usernamePlaceholder"></span> │ 
+      <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
       <a href="banking.html">Wallet</a> │ 
       <a href="index.html">Logout</a>
-    </div>    
+    </div>
+    <div id="clock"></div>
     <div class="panel">
       <h3>🌐│𝘂𝗽𝗱𝗮𝘁𝗲𝘀</h3>
       <input type="text" id="discordMessageUpdates" placeholder="Enter your message here...">
@@ -163,22 +137,22 @@ h1 {
       </div>
     </div>
     <div class="panel">
-        <h3>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h3>
-        <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
-        <div>
-          <button id="fillButtonTransactions">Fill</button>
-          <button id="sendButtonTransactions">Send</button>
-          <button id="clearButtonTransactions">Clear</button>
-        </div>
+      <h3>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h3>
+      <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
+      <div>
+        <button id="fillButtonTransactions">Fill</button>
+        <button id="sendButtonTransactions">Send</button>
+        <button id="clearButtonTransactions">Clear</button>
       </div>
+    </div>
     <div class="panel">
-        <h3>🧙│𝘂𝗽𝗹𝗼𝗮𝗱𝘀</h3>
-        <input type="text" id="fileName" placeholder="No file chosen" readonly>
-        <div>
-          <button id="chooseFileButton">Choose File</button>
-          <input type="file" id="fileInput" style="display: none;">
-        </div>
+      <h3>🧙│𝘂𝗽𝗹𝗼𝗮𝗱𝘀</h3>
+      <input type="text" id="fileName" placeholder="No file chosen" readonly>
+      <div>
+        <button id="chooseFileButton">Choose File</button>
+        <input type="file" id="fileInput" style="display: none;">
       </div>
+    </div>
   </div>
 
   <script>

@@ -11,7 +11,7 @@
       background: url("https://i.imgur.com/lScgeBj.jpg") no-repeat center center fixed;
       background-size: cover;
       color: #fff;
-      font-size: 2rem;
+      font-size: 1.5rem; /* Adjusted font size for better mobile readability */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -25,10 +25,9 @@
     }
 
     #clock {
-    font-size: 1rem; /* Match the font size of the adjacent text */
-    font-family: inherit; /* Use the same font family as the surrounding text */
-  }
-
+      font-size: 1rem; /* Adjusted font size for the clock */
+      font-family: inherit; /* Use the same font family as the surrounding text */
+    }
 
     #profileInfo {
       position: absolute;
@@ -59,10 +58,12 @@
     /* Panel styles */
     .panel {
       background-color: rgba(0, 0, 0, 0.8);
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 15px;
+      width: 90%; /* Adjusted width for better fit on smaller screens */
+      max-width: 400px; /* Limit maximum width to avoid over-expansion */
     }
 
     .panel h2 {
@@ -70,7 +71,7 @@
     }
 
     .panel input[type="text"] {
-      width: 100%;
+      width: calc(100% - 20px); /* Adjusted width to fit within panel padding */
       padding: 10px;
       margin: 10px 0;
       box-sizing: border-box;
@@ -78,6 +79,7 @@
       border: 1px solid #444;
       color: #fff;
       border-radius: 5px;
+      font-size: 1rem; /* Adjusted font size for inputs */
     }
 
     .panel input[readonly] {
@@ -92,7 +94,7 @@
       cursor: pointer;
       font-size: 1rem;
       border-radius: 5px;
-      margin-right: 10px; /* Add some margin to space out the buttons */
+      margin: 5px; /* Add some margin to space out the buttons */
     }
 
     .panel button:hover {
@@ -102,7 +104,7 @@
 </head>
 <body>
   <div style="text-align: center;">
-    <h1>TORNET MARKET</h1>
+    <h1 style="font-size: 2rem;">TORNET MARKET</h1> <!-- Adjusted font size for heading -->
     <div id="profileInfo">
       Hello, swiping.cc <span id="usernamePlaceholder"></span> │ 
       <span id="clock"></span> │ 

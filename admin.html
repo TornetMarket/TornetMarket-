@@ -55,11 +55,13 @@
 
     /* Panel styles */
     .panel {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
       border-radius: 10px;
       text-align: center;
       margin-top: 20px;
+      width: 90%; /* Stretch panels more */
+      max-width: 800px; /* Add a max-width for large screens */
     }
 
     .panel h2 {
@@ -91,6 +93,13 @@
     .panel button:hover {
       background-color: #005f8a;
     }
+
+    /* Specific styles for mobile devices */
+    @media only screen and (max-width: 768px) {
+      .panel {
+        width: 95%; /* Make sure the panel fits well on smaller screens */
+      }
+    }
   </style>
 </head>
 <body>
@@ -113,14 +122,14 @@
       </div>
     </div>
     <div class="panel">
-        <h2>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h2>
-        <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
-        <div>
-          <button id="fillButtonTransactions">Fill</button>
-          <button id="sendButtonTransactions">Send</button>
-          <button id="clearButtonTransactions">Clear</button>
-        </div>
+      <h2>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h2>
+      <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
+      <div>
+        <button id="fillButtonTransactions">Fill</button>
+        <button id="sendButtonTransactions">Send</button>
+        <button id="clearButtonTransactions">Clear</button>
       </div>
+    </div>
   </div>
 
   <script>
@@ -219,6 +228,8 @@
     document.getElementById('clearButtonTransactions').onclick = function() {
       document.getElementById('discordMessageTransactions').value = '';
     }
+
+    document.getElementById('usernamePlaceholder').textContent = username;
   </script>
 </body>
 </html>

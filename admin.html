@@ -148,12 +148,11 @@ h1 {
   <div style="text-align: center;">
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
-      Hello, swiping.cc <span id="usernamePlaceholder"></span> │ 
-      <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
+      Hello, swiping.cc<span id="usernamePlaceholder"></span> │ 
+      <span id="dashboardTime"></span> │ 
       <a href="banking.html">Wallet</a> │ 
       <a href="index.html">Logout</a>
-    </div>
-    <div id="clock"></div>
+    </div>    
     <div class="panel">
       <h3>🌐│𝘂𝗽𝗱𝗮𝘁𝗲𝘀</h3>
       <input type="text" id="discordMessageUpdates" placeholder="Enter your message here...">
@@ -313,5 +312,29 @@ h1 {
       });
     }
   </script>
+  <script>
+    // Function to update the current time every second
+    function updateTime() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      let period = hours >= 12 ? 'PM' : 'AM';
+  
+      // Convert hours to 12-hour format
+      hours = hours % 12;
+      hours = hours ? hours : 12; // Handle midnight (0 hours)
+  
+      const timeString = `${hours}:${minutes}:${seconds} ${period}`;
+      document.getElementById('dashboardTime').textContent = timeString;
+    }
+  
+    // Update current time every second
+    setInterval(updateTime, 1000); // 1 second in milliseconds
+  
+    // Call updateTime() once immediately to initialize the clock
+    updateTime();
+  </script>
+  
 </body>
 </html>

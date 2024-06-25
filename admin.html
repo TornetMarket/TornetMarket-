@@ -18,9 +18,10 @@
       align-items: center;
       padding: 20px;
       margin: 0;
-      height: 100vh;
+      min-height: 100vh; /* Ensure minimum height to cover viewport */
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden; /* Hide horizontal overflow */
+      overflow-y: auto; /* Enable vertical scrollbar when content exceeds viewport */
     }
 
     #clock {

@@ -55,7 +55,7 @@
 
     /* Panel styles */
     .panel {
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 20px;
       border-radius: 10px;
       text-align: center;
@@ -96,8 +96,20 @@
 
     /* Specific styles for mobile devices */
     @media only screen and (max-width: 768px) {
+      body {
+        justify-content: flex-start; /* Align content to the top */
+        padding-top: 40px;
+      }
       .panel {
-        width: 95%; /* Make sure the panel fits well on smaller screens */
+        width: 95%; /* Ensure the panel fits well on smaller screens */
+        max-width: 100%; /* Remove the max-width restriction */
+      }
+      #profileInfo {
+        width: calc(100% - 40px); /* Ensure profile info is within screen bounds */
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 0.8rem;
       }
     }
   </style>

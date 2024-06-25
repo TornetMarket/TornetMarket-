@@ -14,7 +14,7 @@
       font-size: 2rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       padding: 20px;
       margin: 0;
@@ -25,8 +25,10 @@
     }
 
     #clock {
-      font-size: 1.5rem;
-    }
+    font-size: 1rem; /* Match the font size of the adjacent text */
+    font-family: inherit; /* Use the same font family as the surrounding text */
+  }
+
 
     #profileInfo {
       position: absolute;
@@ -61,16 +63,14 @@
       border-radius: 10px;
       text-align: center;
       margin-top: 20px;
-      width: 100%; /* Ensure panels take full width */
-      box-sizing: border-box; /* Include padding and border in width */
     }
 
-    .panel h3 {
+    .panel h2 {
       margin-bottom: 10px;
     }
 
     .panel input[type="text"] {
-      width: calc(100% - 20px); /* Adjust width for padding */
+      width: 100%;
       padding: 10px;
       margin: 10px 0;
       box-sizing: border-box;
@@ -98,23 +98,6 @@
     .panel button:hover {
       background-color: #005f8a;
     }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      body {
-        font-size: 1.5rem; /* Adjust font size for smaller screens */
-      }
-
-      h1 {
-        font-size: 2rem; /* Adjust header font size */
-      }
-
-      #profileInfo {
-        position: static;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -122,11 +105,10 @@
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
       Hello, swiping.cc <span id="usernamePlaceholder"></span> │ 
-      <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
+      <span id="clock"></span> │ 
       <a href="banking.html">Wallet</a> │ 
       <a href="index.html">Logout</a>
     </div>
-    <div id="clock"></div>
     <div class="panel">
       <h3>🌐│𝘂𝗽𝗱𝗮𝘁𝗲𝘀</h3>
       <input type="text" id="discordMessageUpdates" placeholder="Enter your message here...">
@@ -137,22 +119,22 @@
       </div>
     </div>
     <div class="panel">
-      <h3>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h3>
-      <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
-      <div>
-        <button id="fillButtonTransactions">Fill</button>
-        <button id="sendButtonTransactions">Send</button>
-        <button id="clearButtonTransactions">Clear</button>
+        <h3>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h3>
+        <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
+        <div>
+          <button id="fillButtonTransactions">Fill</button>
+          <button id="sendButtonTransactions">Send</button>
+          <button id="clearButtonTransactions">Clear</button>
+        </div>
       </div>
-    </div>
     <div class="panel">
-      <h3>🧙│𝘂𝗽𝗹𝗼𝗮𝗱𝘀</h3>
-      <input type="text" id="fileName" placeholder="No file chosen" readonly>
-      <div>
-        <button id="chooseFileButton">Choose File</button>
-        <input type="file" id="fileInput" style="display: none;">
+        <h3>🧙│𝘂𝗽𝗹𝗼𝗮𝗱𝘀</h3>
+        <input type="text" id="fileName" placeholder="No file chosen" readonly>
+        <div>
+          <button id="chooseFileButton">Choose File</button>
+          <input type="file" id="fileInput" style="display: none;">
+        </div>
       </div>
-    </div>
   </div>
 
   <script>
@@ -286,29 +268,5 @@
       });
     }
   </script>
-  <script>
-    // Function to update the current time every second
-    function updateTime() {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const seconds = now.getSeconds().toString().padStart(2, '0');
-      let period = hours >= 12 ? 'PM' : 'AM';
-  
-      // Convert hours to 12-hour format
-      hours = hours % 12;
-      hours = hours ? hours : 12; // Handle midnight (0 hours)
-  
-      const timeString = `${hours}:${minutes}:${seconds} ${period}`;
-      document.getElementById('dashboardTime').textContent = timeString;
-    }
-  
-    // Update current time every second
-    setInterval(updateTime, 1000); // 1 second in milliseconds
-  
-    // Call updateTime() once immediately to initialize the clock
-    updateTime();
-  </script>
-  
 </body>
 </html>

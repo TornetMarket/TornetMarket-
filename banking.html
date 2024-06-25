@@ -3,10 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tornet Market ™ | Admin</title>
-  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-  <link rel="icon" href="assets/img/TornetMarketIcon.ico" type="image/x-icon" />
+  <title>Tornet Market ™ | Wallet</title>
+  <link rel="icon" href="assets/img/TornetMarketIcon.ico" type="image/x-icon">
+
   <style>
+
+    /* Popup styling */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    .popup.active {
+      display: block;
+    }
+
+    .popup-message {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .popup-close {
+      cursor: pointer;
+      color: #0c8cbb;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+
     body {
       background: url("https://i.imgur.com/lScgeBj.jpg") no-repeat center center fixed;
       background-size: cover;
@@ -18,13 +51,10 @@
       align-items: center;
       padding: 20px;
       margin: 0;
-      height: 100vh;
+      min-height: 100vh; /* Ensure minimum height to cover viewport */
       position: relative;
-      overflow: hidden;
-    }
-
-    #clock {
-      font-size: 1.5rem;
+      overflow-x: hidden; /* Hide horizontal overflow */
+      overflow-y: auto; /* Enable vertical scrollbar when content exceeds viewport */
     }
 
     #profileInfo {
@@ -53,174 +83,499 @@
       font-weight: bold;
     }
 
-    /* Panel styles */
-    .panel {
-      background-color: rgba(0, 0, 0, 0.8);
+    #balanceAmount {
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    #balancePanel {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
       padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 20px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-top: 50px;
+      margin: 0 auto; /* Center the panel horizontally */
+      max-width: 80%; /* Limit maximum width of the panel */
+      min-width: 300px; /* Ensure a minimum width for the panel */
+      position: relative; /* Ensure button is positioned relative to this container */
     }
 
-    .panel h2 {
-      margin-bottom: 10px;
+    #balanceLabel {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #ddd;
     }
 
-    .panel input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      box-sizing: border-box;
-      background-color: #333;
-      border: 1px solid #444;
+    #incomePanel {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-top: 20px; /* Adjusted margin */
+      margin-bottom: 20px; /* Added margin bottom */
+      margin: 0 auto; /* Center the panel horizontally */
+      max-width: 40%; /* Limit maximum width of the panel */
+      min-width: 300px; /* Ensure a minimum width for the panel */
+      position: relative; /* Ensure button is positioned relative to this container */
+    }
+
+    #incomeLabel {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #ddd;
+    }
+
+    #addMoneyButton {
+      position: absolute;
+      top: 20px; /* Adjust as needed */
+      right: 20px; /* Adjust as needed */
       color: #fff;
-      border-radius: 5px;
-    }
-
-    .panel button {
-      background-color: #0c8cbb;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
+      border: 2px solid #fff;
+      background-color: transparent;
+      padding: 8px 16px;
       font-size: 1rem;
       border-radius: 5px;
-      margin-right: 10px; /* Add some margin to space out the buttons */
+      cursor: pointer;
     }
 
-    .panel button:hover {
-      background-color: #005f8a;
+    #transactions {
+      margin-top: 20px; /* Adjust margin top as needed */
+      width: 100%;
+      max-height: 50vh; /* Adjust the max-height as needed */
+      overflow-y: auto; /* Enable vertical scrolling */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center items horizontally */
+    }
+
+    .transactionPanel {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-top: 20px;
+      width: 80%; /* Adjust width as needed */
+      max-width: 100%; /* Ensure panel does not exceed container width */
+      min-width: 300px; /* Ensure a minimum width for the panel */
+      display: flex;
+      justify-content: space-between; /* Align items to the edges */
+      align-items: center; /* Center vertically */
+    }
+
+    .transactionDetails {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .transactionName {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .transactionDescription {
+      font-size: 1rem;
+      color: #ccc;
+      margin-top: 5px;
+    }
+
+    .transactionDate {
+      font-size: 0.9rem;
+      color: #fff;
+      margin-top: 5px;
+    }
+
+    .transactionAmount {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 3rem; /* Default font size */
+    }
+
+    h2 {
+      text-align: center; /* Center the "Transactions" heading */
+      margin-bottom: 20px;
+      font-size: 1.8rem; /* Adjusted font size */
+    }
+
+    /* Media Queries */
+    @media (max-width: 1200px) {
+      h1 {
+        font-size: 2.5rem; /* Adjust font size for tablets */
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem; /* Adjust font size for smaller tablets */
+      }
+
+      #balancePanel, #incomePanel, .transactionPanel {
+        max-width: 90%; /* Adjust width for smaller screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem; /* Adjust font size for mobile phones */
+      }
+
+      #balancePanel, #incomePanel, .transactionPanel {
+        max-width: 95%; /* Adjust width for mobile phones */
+        padding: 10px; /* Reduce padding for mobile */
+        min-width: 300px; /* Ensure a minimum width for the panels */
+      }
+
+      .transactionPanel {
+        padding: 15px; /* Adjust padding for mobile */
+      }
+
+      .transactionAmount {
+        font-size: 1rem; /* Reduce font size for mobile */
+      }
+
+      .transactionName, .transactionDescription, .transactionDate {
+        font-size: 1rem; /* Adjust font size for mobile */
+      }
+    }
+
+    #cardsSection {
+      margin-top: 20px; /* Adjust as needed */
+      width: 100%;
+      text-align: center; /* Center the heading */
+    }
+
+    #cardsContainer {
+      display: flex;
+      justify-content: center; /* Center cards horizontally */
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 20px 0;
+    } 
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin: 0 10px; /* Adjust spacing between cards */
+      min-width: 250px; /* Ensure a minimum width for each card */
+      flex: 0 0 auto; /* Prevent cards from shrinking */
+      opacity: 0;
+      position: absolute; /* Positioning for overlapping */
+      transition: opacity 1s, transform 1s;
+    }
+
+    .card.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .card-blue {
+      background: rgba(0, 0, 255, 0.6); /* Blue background */
+    }
+
+    .card-lightgray {
+      background: rgba(94, 93, 93, 0.6); /* Dark gray background */
+    }
+
+    .card-darkgray {
+      background: rgba(50, 50, 50, 0.6); /* Dark gray background */
+    }
+
+    .card-darkgreen {
+      background: rgba(1, 126, 68, 0.678); /* Dark gray background */
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .cardInfo {
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    .cardInfo h3 {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    .cardInfo p {
+      font-size: 1rem;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <div style="text-align: center;">
+  <div>
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
-      Hello, <span id="usernamePlaceholder"></span> │ 
-      <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
-      <a href="dash.html" id="dashboardLink">Dashboard</a> │ 
-      <a href="banking.html">Wallet</a> │ 
-      <a href="#">Autoshop</a> │ 
+      Hello, swiping.cc<span id="usernamePlaceholder"></span> │ 
+      <span id="dashboardTime"></span> │ 
+      <a href="admin.html">Admin Tools</a> │ 
       <a href="index.html">Logout</a>
     </div>
-    <div id="clock"></div>
-    <div class="panel">
-      <h2>🌐│𝘂𝗽𝗱𝗮𝘁𝗲𝘀</h2>
-      <input type="text" id="discordMessageUpdates" placeholder="Enter your message here...">
-      <div>
-        <button id="fillButtonUpdates">Fill</button>
-        <button id="sendButtonUpdates">Send</button>
-        <button id="clearButtonUpdates">Clear</button>
+    <div id="balancePanel">
+      <button id="addMoneyButton">+</button>
+      <div id="balanceLabel">Total Balance</div>
+      <div id="balanceAmount">$ 47,392.95</div>
+    </div>
+    <div id="popupMessage" class="popup">
+      <p class="popup-message">⚠️Your account is currently locked. Make sure to unlock your account before trying to transfer currencies.⚠️</p>
+      <span id="closePopup" class="popup-close">Close</span>
+    </div>
+    <div id="transactions">
+      <h2>Transactions</h2>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Amazon</div>
+          <div class="transactionDescription">Shopping</div>
+          <div class="transactionDate">06/22</div>
+        </div>
+        <div class="transactionAmount">- $ 85.35</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Apple</div>
+          <div class="transactionDescription">Applestore Purchase</div>
+          <div class="transactionDate">06/16</div>
+        </div>
+        <div class="transactionAmount">- $ 15</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Caliva</div>
+          <div class="transactionDescription">Cannabis Store</div>
+          <div class="transactionDate">06/06</div>
+        </div>
+        <div class="transactionAmount">- $ 850</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Bermuda Bank</div>
+          <div class="transactionDescription">Wire Transfer</div>
+          <div class="transactionDate">05/19</div>
+        </div>
+        <div class="transactionAmount">- $ 100,000</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Discord</div>
+          <div class="transactionDescription">Monthly Discord Nitro</div>
+          <div class="transactionDate">04/24</div>
+        </div>
+        <div class="transactionAmount">- $ 99.99</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Bermuda Bank</div>
+          <div class="transactionDescription">Wire Transfer</div>
+          <div class="transactionDate">04/19</div>
+        </div>
+        <div class="transactionAmount">- $ 250,000</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Bermuda Bank</div>
+          <div class="transactionDescription">Wire Transfer</div>
+          <div class="transactionDate">04/11</div>
+        </div>
+        <div class="transactionAmount">- $ 200,000</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Cashapp</div>
+          <div class="transactionDescription">Wire Transfer</div>
+          <div class="transactionDate">04/05</div>
+        </div>
+        <div class="transactionAmount">- $ 50,000</div>
+      </div>
+      <div class="transactionPanel">
+        <div class="transactionDetails">
+          <div class="transactionName">Cashapp</div>
+          <div class="transactionDescription">Wire Transfer</div>
+          <div class="transactionDate">04/02</div>
+        </div>
+        <div class="transactionAmount">- $ 25,000</div>
       </div>
     </div>
-    <div class="panel">
-        <h2>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h2>
-        <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
-        <div>
-          <button id="fillButtonTransactions">Fill</button>
-          <button id="sendButtonTransactions">Send</button>
-          <button id="clearButtonTransactions">Clear</button>
+  </div>
+  <div id="cardsSection">
+    <h2>Cards</h2>
+    <div id="cardsContainer">
+      <div class="card card-blue">
+        <div class="cardInfo">
+          <p>BALANCE</p>
+          <h3>$ 1,256.90</h3>
+          <p>CARD NUMBER</p>
+          <h3>•••• 9905</h3>
+          <p>EXPIRY   CCV</p>
+          <h3>12/25   553</h3>
         </div>
       </div>
+      <div class="card card-lightgray">
+        <div class="cardInfo">
+          <p>BALANCE</p>
+          <h3>$ 3,256.90</h3>
+          <p>CARD NUMBER</p>
+          <h3>•••• 4563</h3>
+          <p>EXPIRY   CCV</p>
+          <h3>09/25   463</h3>
+        </div>
+      </div>
+      <div class="card card-darkgray">
+        <div class="cardInfo">
+          <p>BALANCE</p>
+          <h3>$ 1,756.47</h3>
+          <p>CARD NUMBER</p>
+          <h3>•••• 8304</h3>
+          <p>EXPIRY   CCV</p>
+          <h3>03/26   977</h3>
+        </div>
+      </div>
+      <div class="card card-darkgreen">
+        <div class="cardInfo">
+          <p>BALANCE</p>
+          <h3>$ 7,643.23</h3>
+          <p>CARD NUMBER</p>
+          <h3>•••• 6893</h3>
+          <p>EXPIRY   CCV</p>
+          <h3>05/28   363</h3>
+        </div>
+      </div>
+      <!-- Add more card divs as needed -->
+    </div>
   </div>
+  
 
   <script>
-    function getParameterByName(name, url) {
-      if (!url) url = window.location.href;
-      name = name.replace(/[\[\]]/g, '\\$&');
-      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      const results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    // Function to update balance amount randomly every 5 minutes
+    function updateBalanceAmount() {
+      const currentBalance = parseFloat(document.getElementById('balanceAmount').textContent.replace('$ ', '').replace(',', ''));
+      const randomIncrease = (Math.floor(Math.random() * (21000 - 6000 + 1)) + 6000) / 100; // Random amount between $60.00 and $210.00
+  
+      const newBalance = currentBalance + randomIncrease;
+      document.getElementById('balanceAmount').textContent = "$ " + newBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
-
-    const username = getParameterByName('username');
-
-    function updateTime() {
-      const now = new Date();
-      let hours = now.getHours();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const seconds = now.getSeconds().toString().padStart(2, '0');
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-    }
-
-    updateTime();
-    setInterval(updateTime, 1000);
-
-    function generateRandomBTCPrice() {
-      const min = 8.1354;
-      const max = 32.1354;
-      const randomPrice = (Math.random() * (max - min) + min).toFixed(4);
-      document.getElementById('btcPrice').textContent = randomPrice;
-    }
-
-    generateRandomBTCPrice();
-    setInterval(generateRandomBTCPrice, 300000);
-
-    function sendMessageToDiscord(message, webhookUrl) {
-      const payload = {
-        content: message
-      };
-
-      fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("Message sent to Discord!");
-        } else {
-          alert("Failed to send message.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("Error sending message.");
+  
+    // Function to update card amounts randomly every 5 seconds
+    function updateCardAmounts() {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const currentAmount = parseFloat(card.querySelector('h3').textContent.replace('$ ', '').replace(',', ''));
+        const randomIncrease = (Math.floor(Math.random() * (42000 - 25000 + 1)) + 25000) / 100; // Random amount between $250.00 and $420.00
+  
+        const newAmount = currentAmount + randomIncrease;
+        card.querySelector('h3').textContent = "$ " + newAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       });
     }
-
-    document.getElementById('fillButtonUpdates').onclick = function() {
-      document.getElementById('discordMessageUpdates').value = "🧙 Hello Tornet Market! Thank you for being in our community!";
+  
+    // Function to cycle through cards every 2 seconds
+    function cycleCards() {
+      const cards = document.querySelectorAll('.card');
+      let currentCardIndex = 0;
+  
+      setInterval(() => {
+        cards.forEach((card, index) => {
+          if (index === currentCardIndex) {
+            card.classList.add('active');
+          } else {
+            card.classList.remove('active');
+          }
+        });
+  
+        currentCardIndex = (currentCardIndex + 1) % cards.length;
+      }, 3500); // Change card every 3 seconds
     }
-
-    document.getElementById('sendButtonUpdates').onclick = function() {
-      const message = document.getElementById('discordMessageUpdates').value;
-      if (message) {
-        const webhookUrl = "https://discord.com/api/webhooks/1236748826120032377/k79hULELizRtsd85U6wADhClhbqpsnZh0irdjyf20oxaoxLfHUS7SH8HyL2yC5OvQddO";
-        sendMessageToDiscord(message, webhookUrl);
-      } else {
-        alert("Please enter a message.");
-      }
-    }
-
-    document.getElementById('clearButtonUpdates').onclick = function() {
-      document.getElementById('discordMessageUpdates').value = '';
-    }
-
-    document.getElementById('fillButtonTransactions').onclick = function() {
-      document.getElementById('discordMessageTransactions').value = "💲 Tornet Market ™ : You spent $9.10 at La Dolce Vita Gelato.";
-    }
-
-    document.getElementById('sendButtonTransactions').onclick = function() {
-      const message = document.getElementById('discordMessageTransactions').value;
-      if (message) {
-        const webhookUrl = "https://discord.com/api/webhooks/1255007291263029278/Q1Zj-tK-KUwyiwygqaMj7_5J3Qn_fbA-0mS00gXSXRAZhLVtHjeeSTCZKZ4P0GkdSZpP";
-        sendMessageToDiscord(message, webhookUrl);
-      } else {
-        alert("Please enter a message.");
-      }
-    }
-
-    document.getElementById('clearButtonTransactions').onclick = function() {
-      document.getElementById('discordMessageTransactions').value = '';
-    }
+  
+    // Initial update after 1 second (simulating page load)
+    setTimeout(function() {
+      updateBalanceAmount();
+      updateCardAmounts();
+      setInterval(updateBalanceAmount, 300000); // Update balance every 5 minutes (300,000 milliseconds)
+      setInterval(updateCardAmounts, 30000); // Update card amounts every 5 mih (300,000 milliseconds)
+      cycleCards(); // Start cycling through cards
+    }, 1000); // Start updates after 1 second of page load
   </script>
+  
+  <script>
+    // Function to show popup message
+    function showPopup() {
+      const popup = document.getElementById('popupMessage');
+      popup.classList.add('active');
+    }
+
+    // Function to close popup message
+    function closePopup() {
+      const popup = document.getElementById('popupMessage');
+      popup.classList.remove('active');
+    }
+
+    // Event listener for the add money button
+    document.getElementById('addMoneyButton').addEventListener('click', function() {
+      showPopup();
+    });
+
+    // Event listener for the close popup link
+    document.getElementById('closePopup').addEventListener('click', function() {
+      closePopup();
+    });
+  </script>
+
+<script>
+  // Function to update the current time every second
+  function updateTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    let period = hours >= 12 ? 'PM' : 'AM';
+
+    // Convert hours to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // Handle midnight (0 hours)
+
+    const timeString = `${hours}:${minutes}:${seconds} ${period}`;
+    document.getElementById('dashboardTime').textContent = timeString;
+  }
+
+  // Update current time every second
+  setInterval(updateTime, 1000); // 1 second in milliseconds
+
+  // Call updateTime() once immediately to initialize the clock
+  updateTime();
+</script>
+
 </body>
 </html>

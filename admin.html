@@ -96,13 +96,32 @@
     .panel button:hover {
       background-color: #005f8a;
     }
+
+    /* Default font size for the heading */
+    h1 {
+      font-size: 3rem;
+    }
+
+    /* Adjust font size for smaller screens */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
   </style>
 </head>
 <body>
   <div style="text-align: center;">
     <h1>TORNET MARKET</h1>
     <div id="profileInfo">
-      Hello, <span id="usernamePlaceholder"></span> │ 
+      Hello, swiping.cc <span id="usernamePlaceholder"></span> │ 
       <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
       <a href="banking.html">Wallet</a> │ 
       <a href="index.html">Logout</a>

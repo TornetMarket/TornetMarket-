@@ -18,10 +18,9 @@
       align-items: center;
       padding: 20px;
       margin: 0;
-      min-height: 100vh; /* Ensure minimum height to cover viewport */
+      height: 100vh;
       position: relative;
-      overflow-x: hidden; /* Hide horizontal overflow */
-      overflow-y: auto; /* Enable vertical scrollbar when content exceeds viewport */
+      overflow: hidden;
     }
 
     #clock {
@@ -102,21 +101,24 @@
       <span class="balance">Current balance: <strong id="balanceAmount">BTC <span id="btcPrice">14.2354</span></strong></span> │ 
       <a href="dash.html" id="dashboardLink">Dashboard</a> │ 
       <a href="banking.html">Wallet</a> │ 
+      <a href="#">Autoshop</a> │ 
       <a href="index.html">Logout</a>
     </div>
     <div id="clock"></div>
     <div class="panel">
-      <h3>🌐│𝘂𝗽𝗱𝗮𝘁𝗲𝘀</h3>
+      <h2>🌐│𝘂𝗽𝗱𝗮𝘁𝗲𝘀</h2>
       <input type="text" id="discordMessageUpdates" placeholder="Enter your message here...">
       <div>
+        <button id="fillButtonUpdates">Fill</button>
         <button id="sendButtonUpdates">Send</button>
         <button id="clearButtonUpdates">Clear</button>
       </div>
     </div>
     <div class="panel">
-        <h3>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h3>
+        <h2>💲│𝘁𝗿𝗮𝗻𝘀𝗮𝗰𝘁𝗶𝗼𝗻𝘀</h2>
         <input type="text" id="discordMessageTransactions" placeholder="Enter your message here...">
         <div>
+          <button id="fillButtonTransactions">Fill</button>
           <button id="sendButtonTransactions">Send</button>
           <button id="clearButtonTransactions">Clear</button>
         </div>
@@ -184,6 +186,10 @@
       });
     }
 
+    document.getElementById('fillButtonUpdates').onclick = function() {
+      document.getElementById('discordMessageUpdates').value = "🧙 Hello Tornet Market! Thank you for being in our community!";
+    }
+
     document.getElementById('sendButtonUpdates').onclick = function() {
       const message = document.getElementById('discordMessageUpdates').value;
       if (message) {
@@ -196,6 +202,10 @@
 
     document.getElementById('clearButtonUpdates').onclick = function() {
       document.getElementById('discordMessageUpdates').value = '';
+    }
+
+    document.getElementById('fillButtonTransactions').onclick = function() {
+      document.getElementById('discordMessageTransactions').value = "💲 Tornet Market ™ : You spent $9.10 at La Dolce Vita Gelato.";
     }
 
     document.getElementById('sendButtonTransactions').onclick = function() {

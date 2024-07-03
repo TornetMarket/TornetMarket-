@@ -2,31 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Tornet Market ™ | Admin</title>
-  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <link rel="icon" href="assets/img/TornetMarketIcon.ico" type="image/x-icon" />
   <style>
     body {
       background: url("https://i.imgur.com/lScgeBj.jpg") no-repeat center center fixed;
       background-size: cover;
       color: #fff;
-      font-size: 1.5rem; /* Adjusted font size for better mobile readability */
+      font-size: 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 20px;
       margin: 0;
-      min-height: 100vh; /* Ensure minimum height to cover viewport */
+      min-height: 100vh;
       position: relative;
-      overflow-x: hidden; /* Hide horizontal overflow */
-      overflow-y: auto; /* Enable vertical scrollbar when content exceeds viewport */
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     #clock {
-      font-size: 1rem; /* Adjusted font size for the clock */
-      font-family: inherit; /* Use the same font family as the surrounding text */
+      font-size: 1rem;
+      font-family: inherit;
     }
 
     #profileInfo {
@@ -55,15 +54,14 @@
       font-weight: bold;
     }
 
-    /* Panel styles */
     .panel {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 15px;
       border-radius: 10px;
       text-align: center;
       margin-top: 15px;
-      width: 90%; /* Adjusted width for better fit on smaller screens */
-      max-width: 400px; /* Limit maximum width to avoid over-expansion */
+      width: 90%;
+      max-width: 400px;
     }
 
     .panel h2 {
@@ -71,7 +69,7 @@
     }
 
     .panel input[type="text"] {
-      width: calc(100% - 20px); /* Adjusted width to fit within panel padding */
+      width: calc(100% - 20px);
       padding: 10px;
       margin: 10px 0;
       box-sizing: border-box;
@@ -79,11 +77,11 @@
       border: 1px solid #444;
       color: #fff;
       border-radius: 5px;
-      font-size: 1rem; /* Adjusted font size for inputs */
+      font-size: 1rem;
     }
 
     .panel input[readonly] {
-      background-color: #555; /* Different background for read-only input */
+      background-color: #555;
     }
 
     .panel button {
@@ -94,7 +92,7 @@
       cursor: pointer;
       font-size: 1rem;
       border-radius: 5px;
-      margin: 5px; /* Add some margin to space out the buttons */
+      margin: 5px;
     }
 
     .panel button:hover {
@@ -104,7 +102,7 @@
 </head>
 <body>
   <div style="text-align: center;">
-    <h1 style="font-size: 2rem;">TORNET MARKET</h1> <!-- Adjusted font size for heading -->
+    <h1 style="font-size: 2rem;">TORNET MARKET</h1>
     <div id="profileInfo">
       Hello, swiping.cc <span id="usernamePlaceholder"></span> │ 
       <span id="clock"></span> │ 
@@ -128,7 +126,7 @@
           <button id="sendButtonTransactions">Send</button>
           <button id="clearButtonTransactions">Clear</button>
         </div>
-      </div>
+    </div>
     <div class="panel">
         <h3>🧙│𝘂𝗽𝗹𝗼𝗮𝗱𝘀</h3>
         <input type="text" id="fileName" placeholder="No file chosen" readonly>
@@ -136,7 +134,14 @@
           <button id="chooseFileButton">Choose File</button>
           <input type="file" id="fileInput" style="display: none;">
         </div>
-      </div>
+    </div>
+    <div class="panel">
+        <h3>🕵️│𝗿𝗲𝗰𝗼𝗻</h3>
+        <input type="text" id="reconInput" placeholder="User/Name/Email/Number">
+        <div>
+          <button id="reconButton">Lookup</button>
+        </div>
+    </div>
   </div>
 
   <script>
@@ -188,7 +193,36 @@
           uploadFileToDiscord(file);
         }
       }
+
+      document.getElementById('reconButton').onclick = function() {
+        const reconInput = document.getElementById('reconInput').value;
+        if (reconInput) {
+          const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
+          const messages = [
+            `Reconnaissance has started for ${reconInput}. Please be patient as the recon can take some time...`,
+            `Crawling all Data Bases in the United States for information on ${reconInput}..`,
+            `Crawling web for any relation to ${reconInput}..`,
+            `Crawling all state DMV records for ${reconInput}..`,
+            `Partial matches found on ${reconInput}.. Visit your Tornet Market ™ burn link for the information.`
+          ];
+          
+          sendMessagesToDiscord(messages, webhookUrl);
+          alert(messages[0]);
+        } else {
+          alert("Please enter a name, email, or number.");
+        }
+      }
     });
+
+    function sendMessagesToDiscord(messages, webhookUrl) {
+      const delayTimes = [0, 4 * 60 * 1000, 10 * 60 * 1000, 18 * 60 * 1000, 22 * 60 * 1000];
+
+      messages.forEach((message, index) => {
+        setTimeout(() => {
+          sendMessageToDiscord(message, webhookUrl);
+        }, delayTimes[index]);
+      });
+    }
 
     function sendMessageToDiscord(message, webhookUrl) {
       const payload = {
@@ -203,15 +237,12 @@
         body: JSON.stringify(payload)
       })
       .then(response => {
-        if (response.ok) {
-          alert("Message sent to Discord!");
-        } else {
-          alert("Failed to send message.");
+        if (!response.ok) {
+          console.error("Failed to send message.");
         }
       })
       .catch(error => {
         console.error("Error:", error);
-        alert("Error sending message.");
       });
     }
 
@@ -236,8 +267,7 @@
         alert("Error uploading file.");
       });
     }
-  </script>
-  <script>
+
     function updateTime() {
       const now = new Date();
       let hours = now.getHours();

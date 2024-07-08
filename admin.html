@@ -142,10 +142,11 @@
       <input type="text" id="expDate" placeholder="Exp Date">
       <input type="text" id="cardHolderName" placeholder="CardHolder Name">
       <div>
+        <button id="fillButtonCarding">Fill</button> <!-- Added Fill button -->
         <button id="sendButtonCarding">Send</button>
         <button id="clearButtonCarding">Clear</button>
       </div>
-    </div>
+    </div>    
     <div class="panel">
       <h3>🟢│𝘀𝘀𝗹-𝘁𝗹𝘀</h3>
       <input type="text" id="discordMessageSslTls" placeholder="Enter your message here...">
@@ -211,6 +212,51 @@
       alert("Please enter a message.");
     }
   }
+
+  // Function to generate random card number
+  function generateRandomCardNumber() {
+    let result = '';
+    for (let i = 0; i < 16; i++) {
+      result += Math.floor(Math.random() * 10);
+      if ((i + 1) % 4 === 0 && i < 15) {
+        result += ' '; // Add space every 4 digits for better readability
+      }
+    }
+    return result;
+  }
+
+  // Function to generate random CVV (3 digits)
+  function generateRandomCVV() {
+    return Math.floor(100 + Math.random() * 900).toString();
+  }
+
+  // Function to generate random expiration date (MM/YY format)
+  function generateRandomExpDate() {
+    const month = Math.floor(1 + Math.random() * 12).toString().padStart(2, '0');
+    const year = (new Date().getFullYear() + Math.floor(Math.random() * 5)).toString().slice(-2); // Random year within the next 5 years
+    return `${month}/${year}`;
+  }
+
+  // Function to generate random cardholder name
+  function generateRandomCardHolderName() {
+    const commonNames = [
+      "James Smith", "John Johnson", "Robert Williams", "Michael Brown", "William Jones",
+      "David Miller", "Richard Davis", "Joseph Garcia", "Charles Rodriguez", "Thomas Wilson",
+      "Mary Martinez", "Patricia Anderson", "Jennifer Taylor", "Linda Lopez", "Elizabeth Gonzalez",
+      "Barbara Moore", "Susan Hernandez", "Jessica King", "Sarah Wright", "Karen Lopez",
+      "Daniel Hill", "Matthew Scott", "Christopher Green", "Anthony Adams", "Mark Baker"
+    ];
+    return commonNames[Math.floor(Math.random() * commonNames.length)];
+  }
+
+  // Fill Carding Message
+  document.getElementById('fillButtonCarding').onclick = function() {
+    document.getElementById('cardNumber').value = generateRandomCardNumber();
+    document.getElementById('cvv').value = generateRandomCVV();
+    document.getElementById('expDate').value = generateRandomExpDate();
+    document.getElementById('cardHolderName').value = generateRandomCardHolderName();
+  }
+
 
   // Clear Updates Message
   document.getElementById('clearButtonUpdates').onclick = function() {

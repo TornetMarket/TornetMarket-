@@ -128,158 +128,187 @@
         </div>
     </div>
     <div class="panel">
-        <h3>🕵️│𝗿𝗲𝗰𝗼𝗻</h3>
-        <input type="text" id="reconInput" placeholder="User/Name/Email/Number">
-        <div>
+      <h3>🕵️│𝗿𝗲𝗰𝗼𝗻</h3>
+      <input type="text" id="reconInput" placeholder="User/Name/Email/Number">
+      <div>
           <button id="reconButton">Lookup</button>
-        </div>
+          <button id="clearReconButton">Clear</button> <!-- New clear button -->
+      </div>
     </div>
     <div class="panel">
       <h3>🧙│𝘂𝗽𝗹𝗼𝗮𝗱𝘀</h3>
       <input type="text" id="fileName" placeholder="No file chosen" readonly>
       <div>
-        <button id="chooseFileButton">Choose File</button>
-        <input type="file" id="fileInput" style="display: none;">
+          <button id="chooseFileButton">Choose File</button>
+          <input type="file" id="fileInput" style="display: none;">
+          <button id="clearUploadsButton">Clear</button> <!-- New clear button -->
       </div>
-  </div>
+    </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('fillButtonUpdates').onclick = function() {
+    // Fill Updates Message
+    document.getElementById('fillButtonUpdates').onclick = function() {
         document.getElementById('discordMessageUpdates').value = "🧙 Hello Tornet Market! Thank you for being in our community!";
-      }
+    }
 
-      document.getElementById('sendButtonUpdates').onclick = function() {
+    // Send Updates Message
+    document.getElementById('sendButtonUpdates').onclick = function() {
         const message = document.getElementById('discordMessageUpdates').value;
         if (message) {
-          const webhookUrl = "https://discord.com/api/webhooks/1236748826120032377/k79hULELizRtsd85U6wADhClhbqpsnZh0irdjyf20oxaoxLfHUS7SH8HyL2yC5OvQddO";
-          sendMessageToDiscord(message, webhookUrl);
+            const webhookUrl = "https://discord.com/api/webhooks/1236748826120032377/k79hULELizRtsd85U6wADhClhbqpsnZh0irdjyf20oxaoxLfHUS7SH8HyL2yC5OvQddO";
+            sendMessageToDiscord(message, webhookUrl);
         } else {
-          alert("Please enter a message.");
+            alert("Please enter a message.");
         }
-      }
+    }
 
-      document.getElementById('clearButtonUpdates').onclick = function() {
+    // Clear Updates Message
+    document.getElementById('clearButtonUpdates').onclick = function() {
         document.getElementById('discordMessageUpdates').value = '';
-      }
+    }
 
-      document.getElementById('fillButtonTransactions').onclick = function() {
+    // Fill Transactions Message
+    document.getElementById('fillButtonTransactions').onclick = function() {
         document.getElementById('discordMessageTransactions').value = "💲 Tornet Market ™ : You spent $9.10 at La Dolce Vita Gelato.";
-      }
+    }
 
-      document.getElementById('sendButtonTransactions').onclick = function() {
+    // Send Transactions Message
+    document.getElementById('sendButtonTransactions').onclick = function() {
         const message = document.getElementById('discordMessageTransactions').value;
         if (message) {
-          const webhookUrl = "https://discord.com/api/webhooks/1255007291263029278/Q1Zj-tK-KUwyiwygqaMj7_5J3Qn_fbA-0mS00gXSXRAZhLVtHjeeSTCZKZ4P0GkdSZpP";
-          sendMessageToDiscord(message, webhookUrl);
+            const webhookUrl = "https://discord.com/api/webhooks/1255007291263029278/Q1Zj-tK-KUwyiwygqaMj7_5J3Qn_fbA-0mS00gXSXRAZhLVtHjeeSTCZKZ4P0GkdSZpP";
+            sendMessageToDiscord(message, webhookUrl);
         } else {
-          alert("Please enter a message.");
+            alert("Please enter a message.");
         }
-      }
+    }
 
-      document.getElementById('clearButtonTransactions').onclick = function() {
+    // Clear Transactions Message
+    document.getElementById('clearButtonTransactions').onclick = function() {
         document.getElementById('discordMessageTransactions').value = '';
-      }
+    }
 
-      document.getElementById('chooseFileButton').onclick = function() {
+    // Choose File Button
+    document.getElementById('chooseFileButton').onclick = function() {
         document.getElementById('fileInput').click();
-      }
+    }
 
-      document.getElementById('fileInput').onchange = function(event) {
+    // Handle File Input Change
+    document.getElementById('fileInput').onchange = function(event) {
         const file = event.target.files[0];
         if (file) {
-          document.getElementById('fileName').value = file.name;
-          uploadFileToDiscord(file);
+            document.getElementById('fileName').value = file.name;
+            uploadFileToDiscord(file);
         }
-      }
+    }
 
-      document.getElementById('reconButton').onclick = function() {
+    // Recon Button
+    document.getElementById('reconButton').onclick = function() {
         const reconInput = document.getElementById('reconInput').value;
         if (reconInput) {
-          const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
-          const messages = [
-            `Reconnaissance has started for ${reconInput}. Please be patient as the recon can take some time...`,
-            `Crawling all Data Bases in the United States for information on ${reconInput}..`,
-            `Crawling web for any relation to ${reconInput}..`,
-            `Crawling all state DMV records for ${reconInput}..`,
-            `Partial matches found on ${reconInput}.. Visit your Tornet Market ™ burn link for the information.`
-          ];
-          
-          sendMessagesToDiscord(messages, webhookUrl);
-          alert(messages[0]);
+            const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
+            const messages = [
+                `Reconnaissance has started for ${reconInput}. Please be patient as the recon can take some time...`,
+                `Crawling all Data Bases in the United States for information on ${reconInput}..`,
+                `Crawling web for any relation to ${reconInput}..`,
+                `Crawling all state DMV records for ${reconInput}..`,
+                `Partial matches found on ${reconInput}.. Visit your Tornet Market ™ burn link for the information.`
+            ];
+
+            sendMessagesToDiscord(messages, webhookUrl);
+            alert(messages[0]);
         } else {
-          alert("Please enter a name, email, or number.");
+            alert("Please enter a name, email, or number.");
         }
-      }
-    });
-
-    function sendMessagesToDiscord(messages, webhookUrl) {
-      const delayTimes = [0, 4 * 60 * 1000, 10 * 60 * 1000, 18 * 60 * 1000, 22 * 60 * 1000];
-
-      messages.forEach((message, index) => {
-        setTimeout(() => {
-          sendMessageToDiscord(message, webhookUrl);
-        }, delayTimes[index]);
-      });
     }
 
-    function sendMessageToDiscord(message, webhookUrl) {
-      const payload = {
-        content: message
-      };
+    // Clear Recon Input
+    document.getElementById('clearReconButton').onclick = function() {
+        document.getElementById('reconInput').value = '';
+    }
 
-      fetch(webhookUrl, {
+    // Clear Uploads Input and File
+    document.getElementById('clearUploadsButton').onclick = function() {
+        document.getElementById('fileName').value = 'No file chosen';
+        document.getElementById('fileInput').value = '';
+    }
+
+    // Update Time Display
+    function updateTime() {
+        const now = new Date();
+        let hours = now.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+    }
+
+    // Initial Time Update
+    updateTime();
+    // Update Time Every Second
+    setInterval(updateTime, 1000);
+});
+
+// Function to Send Messages to Discord
+function sendMessagesToDiscord(messages, webhookUrl) {
+    const delayTimes = [0, 4 * 60 * 1000, 10 * 60 * 1000, 18 * 60 * 1000, 22 * 60 * 1000];
+
+    messages.forEach((message, index) => {
+        setTimeout(() => {
+            sendMessageToDiscord(message, webhookUrl);
+        }, delayTimes[index]);
+    });
+}
+
+// Function to Send Message to Discord
+function sendMessageToDiscord(message, webhookUrl) {
+    const payload = {
+        content: message
+    };
+
+    fetch(webhookUrl, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(payload)
-      })
-      .then(response => {
+    })
+    .then(response => {
         if (!response.ok) {
-          console.error("Failed to send message.");
+            console.error("Failed to send message.");
         }
-      })
-      .catch(error => {
+    })
+    .catch(error => {
         console.error("Error:", error);
-      });
-    }
+    });
+}
 
-    function uploadFileToDiscord(file) {
-      const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
-      const formData = new FormData();
-      formData.append("file", file);
+// Function to Upload File to Discord
+function uploadFileToDiscord(file) {
+    const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
+    const formData = new FormData();
+    formData.append("file", file);
 
-      fetch(webhookUrl, {
+    fetch(webhookUrl, {
         method: "POST",
         body: formData
-      })
-      .then(response => {
+    })
+    .then(response => {
         if (response.ok) {
-          alert("File uploaded successfully!");
+            alert("File uploaded successfully!");
         } else {
-          alert("Failed to upload file.");
+            alert("Failed to upload file.");
         }
-      })
-      .catch(error => {
+    })
+    .catch(error => {
         console.error("Error:", error);
         alert("Error uploading file.");
-      });
-    }
+    });
+}
 
-    function updateTime() {
-      const now = new Date();
-      let hours = now.getHours();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const seconds = now.getSeconds().toString().padStart(2, '0');
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-    }
-
-    updateTime();
-    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>

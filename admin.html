@@ -128,6 +128,34 @@
         </div>
     </div>
     <div class="panel">
+      <h3>💬│𝗰𝗵𝗮𝘁</h3>
+      <input type="text" id="discordMessageChat" placeholder="Enter your message here...">
+      <div>
+        <button id="sendButtonChat">Send</button>
+        <button id="clearButtonChat">Clear</button> <!-- Added Clear button -->
+      </div>
+    </div>
+    <div class="panel">
+      <h3>💳│𝗰𝗮𝗿𝗱𝗶𝗻𝗴</h3>
+      <input type="text" id="cardNumber" placeholder="Card Number">
+      <input type="text" id="cvv" placeholder="CVV">
+      <input type="text" id="expDate" placeholder="Exp Date">
+      <input type="text" id="cardHolderName" placeholder="CardHolder Name">
+      <div>
+        <button id="sendButtonCarding">Send</button>
+        <button id="clearButtonCarding">Clear</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>🟢│𝘀𝘀𝗹-𝘁𝗹𝘀</h3>
+      <input type="text" id="discordMessageSslTls" placeholder="Enter your message here...">
+      <div>
+        <button id="sendButtonSslTls">Send</button>
+        <button id="clearButtonSslTls">Clear</button>
+      </div>
+    </div>
+  
+    <div class="panel">
       <h3>🕵️│𝗿𝗲𝗰𝗼𝗻</h3>
       <input type="text" id="reconInput" placeholder="User/Name/Email/Number">
       <div>
@@ -147,167 +175,224 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Fill Updates Message
-    document.getElementById('fillButtonUpdates').onclick = function() {
-        document.getElementById('discordMessageUpdates').value = "🧙 Hello Tornet Market! Thank you for being in our community!";
-    }
-
-    // Send Updates Message
-    document.getElementById('sendButtonUpdates').onclick = function() {
-        const message = document.getElementById('discordMessageUpdates').value;
-        if (message) {
-            const webhookUrl = "https://discord.com/api/webhooks/1236748826120032377/k79hULELizRtsd85U6wADhClhbqpsnZh0irdjyf20oxaoxLfHUS7SH8HyL2yC5OvQddO";
-            sendMessageToDiscord(message, webhookUrl);
-        } else {
-            alert("Please enter a message.");
-        }
-    }
-
-    // Clear Updates Message
-    document.getElementById('clearButtonUpdates').onclick = function() {
-        document.getElementById('discordMessageUpdates').value = '';
-    }
-
-    // Fill Transactions Message
-    document.getElementById('fillButtonTransactions').onclick = function() {
-        document.getElementById('discordMessageTransactions').value = "💲 Tornet Market ™ : You spent $9.10 at La Dolce Vita Gelato.";
-    }
-
-    // Send Transactions Message
-    document.getElementById('sendButtonTransactions').onclick = function() {
-        const message = document.getElementById('discordMessageTransactions').value;
-        if (message) {
-            const webhookUrl = "https://discord.com/api/webhooks/1255007291263029278/Q1Zj-tK-KUwyiwygqaMj7_5J3Qn_fbA-0mS00gXSXRAZhLVtHjeeSTCZKZ4P0GkdSZpP";
-            sendMessageToDiscord(message, webhookUrl);
-        } else {
-            alert("Please enter a message.");
-        }
-    }
-
-    // Clear Transactions Message
-    document.getElementById('clearButtonTransactions').onclick = function() {
-        document.getElementById('discordMessageTransactions').value = '';
-    }
-
-    // Choose File Button
-    document.getElementById('chooseFileButton').onclick = function() {
-        document.getElementById('fileInput').click();
-    }
-
-    // Handle File Input Change
-    document.getElementById('fileInput').onchange = function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            document.getElementById('fileName').value = file.name;
-            uploadFileToDiscord(file);
-        }
-    }
-
-    // Recon Button
-    document.getElementById('reconButton').onclick = function() {
-        const reconInput = document.getElementById('reconInput').value;
-        if (reconInput) {
-            const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
-            const messages = [
-                `Reconnaissance has started for ${reconInput}. Please be patient as the recon can take some time...`,
-                `Crawling all Data Bases in the United States for information on ${reconInput}..`,
-                `Crawling web for any relation to ${reconInput}..`,
-                `Crawling all state DMV records for ${reconInput}..`,
-                `Partial matches found on ${reconInput}.. Visit your Tornet Market ™ burn link for the information.`
-            ];
-
-            sendMessagesToDiscord(messages, webhookUrl);
-            alert(messages[0]);
-        } else {
-            alert("Please enter a name, email, or number.");
-        }
-    }
-
-    // Clear Recon Input
-    document.getElementById('clearReconButton').onclick = function() {
-        document.getElementById('reconInput').value = '';
-    }
-
-    // Clear Uploads Input and File
-    document.getElementById('clearUploadsButton').onclick = function() {
-        document.getElementById('fileName').value = 'No file chosen';
-        document.getElementById('fileInput').value = '';
-    }
-
-    // Update Time Display
-    function updateTime() {
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to update the clock
+    function updateClock() {
         const now = new Date();
-        let hours = now.getHours();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12 || 12;
+        const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
         const seconds = now.getSeconds().toString().padStart(2, '0');
-        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById('clock').textContent = timeString;
     }
 
-    // Initial Time Update
-    updateTime();
-    // Update Time Every Second
-    setInterval(updateTime, 1000);
+    // Initial call to update clock when page loads
+    updateClock();
+
+    // Update clock every second
+    setInterval(updateClock, 1000);
 });
 
-// Function to Send Messages to Discord
-function sendMessagesToDiscord(messages, webhookUrl) {
-    const delayTimes = [0, 4 * 60 * 1000, 10 * 60 * 1000, 18 * 60 * 1000, 22 * 60 * 1000];
 
-    messages.forEach((message, index) => {
-        setTimeout(() => {
-            sendMessageToDiscord(message, webhookUrl);
-        }, delayTimes[index]);
-    });
-}
+  document.addEventListener('DOMContentLoaded', function() {
+  // Fill Updates Message
+  document.getElementById('fillButtonUpdates').onclick = function() {
+    document.getElementById('discordMessageUpdates').value = "🧙 Hello Tornet Market! Thank you for being in our community!";
+  }
 
-// Function to Send Message to Discord
-function sendMessageToDiscord(message, webhookUrl) {
-    const payload = {
-        content: message
-    };
+  // Send Updates Message
+  document.getElementById('sendButtonUpdates').onclick = function() {
+    const message = document.getElementById('discordMessageUpdates').value;
+    if (message) {
+      const webhookUrl = "https://discord.com/api/webhooks/1236748826120032377/k79hULELizRtsd85U6wADhClhbqpsnZh0irdjyf20oxaoxLfHUS7SH8HyL2yC5OvQddO";
+      sendMessageToDiscord({ content: message }, webhookUrl);
+    } else {
+      alert("Please enter a message.");
+    }
+  }
 
+  // Clear Updates Message
+  document.getElementById('clearButtonUpdates').onclick = function() {
+    document.getElementById('discordMessageUpdates').value = '';
+  }
+
+  // Fill Transactions Message
+  document.getElementById('fillButtonTransactions').onclick = function() {
+    document.getElementById('discordMessageTransactions').value = "💲 Tornet Market ™ : You spent $9.10 at La Dolce Vita Gelato.";
+  }
+
+  // Send Transactions Message
+  document.getElementById('sendButtonTransactions').onclick = function() {
+    const message = document.getElementById('discordMessageTransactions').value;
+    if (message) {
+      const webhookUrl = "https://discord.com/api/webhooks/1255007291263029278/Q1Zj-tK-KUwyiwygqaMj7_5J3Qn_fbA-0mS00gXSXRAZhLVtHjeeSTCZKZ4P0GkdSZpP";
+      sendMessageToDiscord({ content: message }, webhookUrl);
+    } else {
+      alert("Please enter a message.");
+    }
+  }
+
+  // Clear Transactions Message
+  document.getElementById('clearButtonTransactions').onclick = function() {
+    document.getElementById('discordMessageTransactions').value = '';
+  }
+
+  // Send Chat Message
+  document.getElementById('sendButtonChat').onclick = function() {
+    const message = document.getElementById('discordMessageChat').value;
+    if (message) {
+      const webhookUrl = "https://discord.com/api/webhooks/1259398370427011142/xXbcXzZMBGx2L-zvoPkpztM3U05EQBIk_9Wy2-rqGdQj92Me79eoCzK6tgNDhiEf7knX";
+      sendMessageToDiscord({ content: message }, webhookUrl);
+    } else {
+      alert("Please enter a message.");
+    }
+  }
+
+  // Clear Chat Message
+  document.getElementById('clearButtonChat').onclick = function() {
+    document.getElementById('discordMessageChat').value = '';
+  }
+
+  // Send Carding Message
+  document.getElementById('sendButtonCarding').onclick = function() {
+    const cardNumber = document.getElementById('cardNumber').value;
+    const cvv = document.getElementById('cvv').value;
+    const expDate = document.getElementById('expDate').value;
+    const cardHolderName = document.getElementById('cardHolderName').value;
+
+    if (cardNumber && cvv && expDate && cardHolderName) {
+      const message = {
+        embeds: [{
+          title: "Carding Information",
+          fields: [
+            { name: "Card Number", value: cardNumber, inline: true },
+            { name: "CVV", value: cvv, inline: true },
+            { name: "Exp Date", value: expDate, inline: true },
+            { name: "CardHolder Name", value: cardHolderName, inline: true }
+          ],
+          color: 0x5865F2 // You can change the color code as needed
+        }]
+      };
+      const webhookUrl = "https://discord.com/api/webhooks/1259400460087853076/jRJwKt013rSHSsh-2yLH0fXnBRPFqDmUG08Dow9fIYtyeNGyy_-gjubTjIzqMVY0qShw";
+      sendMessageToDiscord(message, webhookUrl);
+    } else {
+      alert("Please fill in all fields.");
+    }
+  }
+
+  // Clear Carding Message
+  document.getElementById('clearButtonCarding').onclick = function() {
+    document.getElementById('cardNumber').value = '';
+    document.getElementById('cvv').value = '';
+    document.getElementById('expDate').value = '';
+    document.getElementById('cardHolderName').value = '';
+  }
+
+  // Send SSL-TLS Message
+  document.getElementById('sendButtonSslTls').onclick = function() {
+    const message = document.getElementById('discordMessageSslTls').value;
+    if (message) {
+      const webhookUrl = "https://discord.com/api/webhooks/1259401621662597182/QShu45jUJiNnRl-wP7htyCWZ14TcpR8QKtRz1l-3LqgWQNVTgIkzWzlEKTxpvHihjNzm";
+      sendMessageToDiscord({ content: message }, webhookUrl);
+    } else {
+      alert("Please enter a message.");
+    }
+  }
+
+  // Clear SSL-TLS Message
+  document.getElementById('clearButtonSslTls').onclick = function() {
+    document.getElementById('discordMessageSslTls').value = '';
+  }
+
+  // Choose File Button
+  document.getElementById('chooseFileButton').onclick = function() {
+    document.getElementById('fileInput').click();
+  }
+
+  // Handle File Input Change
+  document.getElementById('fileInput').onchange = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      document.getElementById('fileName').value = file.name;
+      uploadFileToDiscord(file);
+    } else {
+      document.getElementById('fileName').value = 'No file chosen';
+    }
+  }
+
+  // Recon Button
+  document.getElementById('reconButton').onclick = function() {
+    const reconInput = document.getElementById('reconInput').value;
+    if (reconInput) {
+      const message = `🕵️ Recon Input: ${reconInput}`;
+      const webhookUrls = [
+        "https://discord.com/api/webhooks/123456789012345678/abcdefghijklmnopqrstuvwxyz1234567890",
+        "https://discord.com/api/webhooks/987654321098765432/zyxwvutsrqponmlkjihgfedcba0987654321"
+      ];
+      sendMessagesToDiscord({ content: message }, webhookUrls);
+    } else {
+      alert("Please enter a recon input.");
+    }
+  }
+
+  // Clear Recon Input
+  document.getElementById('clearReconButton').onclick = function() {
+    document.getElementById('reconInput').value = '';
+  }
+
+  // Clear Uploads Input
+  document.getElementById('clearUploadsButton').onclick = function() {
+    document.getElementById('fileName').value = 'No file chosen';
+    document.getElementById('fileInput').value = '';
+  }
+
+  function sendMessageToDiscord(message, webhookUrl) {
     fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        if (!response.ok) {
-            console.error("Failed to send message.");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(message)
+    }).then(response => {
+      if (response.ok) {
+        alert('Message sent successfully!');
+      } else {
+        alert('Failed to send message.');
+      }
+    }).catch(error => {
+      console.error('Error sending message:', error);
+      alert('Error sending message.');
     });
-}
+  }
 
-// Function to Upload File to Discord
-function uploadFileToDiscord(file) {
+  function sendMessagesToDiscord(message, webhookUrls) {
+    webhookUrls.forEach(webhookUrl => {
+      sendMessageToDiscord(message, webhookUrl);
+    });
+  }
+
+  
+
+  function uploadFileToDiscord(file) {
     const webhookUrl = "https://discord.com/api/webhooks/1245113423474200596/q7UsDWbvHm8xUMz0x4Ootelc3vR0152syVJgpLAyAQusLH_f_slLFZ3ODMR2MGytCa9p";
     const formData = new FormData();
-    formData.append("file", file);
-
+    formData.append('file', file);
     fetch(webhookUrl, {
-        method: "POST",
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            alert("File uploaded successfully!");
-        } else {
-            alert("Failed to upload file.");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Error uploading file.");
+      method: 'POST',
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        alert('File uploaded successfully!');
+      } else {
+        alert('Failed to upload file.');
+      }
+    }).catch(error => {
+      console.error('Error uploading file:', error);
+      alert('Error uploading file.');
     });
-}
+  }
+});
 
   </script>
 </body>

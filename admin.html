@@ -425,9 +425,12 @@ document.getElementById('deviceVirusButton').onclick = async function() {
         const deviceVirusContainer = document.getElementById('deviceVirusContainer');
         deviceVirusContainer.appendChild(deviceTextBox);
 
+        // Delay before showing the "Connected" button
+        await new Promise(resolve => setTimeout(resolve, 5735));
+
         // Create the "Connected" button
         const connectedButton = document.createElement('button');
-        connectedButton.innerText = 'Connected';
+        connectedButton.innerText = 'Proceed.';
         deviceVirusContainer.appendChild(connectedButton);
 
         // Function to handle the "Connected" button click

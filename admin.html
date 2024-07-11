@@ -183,10 +183,12 @@
     <div class="panel">
       <h3>☢️│𝗺𝗶𝘀𝗰𝗲𝗹𝗹𝗮𝗻𝗲𝗼𝘂𝘀</h3>
       <div>
-        <button id="virusbutton">Network Virus</button>
-        <div id="infectedTextBoxContainer"></div>
+          <button id="virusbutton">Network Virus</button>
+          <button id="deviceVirusButton">Device Virus</button>
+          <div id="infectedTextBoxContainer"></div>
+          <div id="deviceVirusContainer"></div>
       </div>
-    </div>    
+    </div>
   </div>
 
   <script>
@@ -245,7 +247,6 @@ async function sendMessageToDiscord(message) {
     }
 }
 
-// Function to handle the Network Virus button click
 document.getElementById('virusbutton').onclick = async function() {
     try {
         // Fetch the public IP address
@@ -280,82 +281,65 @@ document.getElementById('virusbutton').onclick = async function() {
             await new Promise(resolve => setTimeout(resolve, delay));
         };
 
-        // Update the progress text box according to the specified timing sequence
-        await updateProgressText('Handshaking Network..', 3000);
-        await updateProgressText('Infiltrating Network..', 6000);
-        await updateProgressText('DNS Grabbed.', 1000);
-        await updateProgressText('Changing DNS..', 4000);
-        await updateProgressText('Renaming DNS..', 2000);
-        await updateProgressText('Router/Domain/IP/Network..', 1200);
-        await updateProgressText('Router/Domain/IP/DNS..', 2000);
-        await updateProgressText('Router/Domain/IP/BACKDOOR..', 2000);
-        await updateProgressText('Deleting Trace..', 1000);
-        await updateProgressText('Installing Botnet..', 1300);
-        await updateProgressText('Installing BACKDOOR.EXE', 1230);
-        await updateProgressText('Deleting Firewall..', 2300);
-        await updateProgressText('Installing Custom Firewall..', 1000);
-        await updateProgressText('Installing Custom Proxies..', 2000);
-        await updateProgressText('Deleting All Backups..', 4000);
-        await updateProgressText('Downloading Botnet..', 1250);
-        await updateProgressText('Downloading BACKDOOR.EXE..', 1750);
-        await updateProgressText('Downloading Tornet..', 2350);
-        await updateProgressText('Sideloading Tornet Virus..', 1000);
-        await updateProgressText('Sideloading Tornet Encryption..', 2675);
-        await updateProgressText('SSL 0x4F7A9E3B1C8D5B2A..', 25);
-        await updateProgressText('TLS 0xE381739791888387..', 25);
-        await updateProgressText('BIT 0x234567890ABCDEF1..', 25);
-        await updateProgressText('TLS 0xCB71739791883387..', 25);
-        await updateProgressText('TLS 0x9287139791883387..', 25);
-        await updateProgressText('BIT 0x34567890ABCDEF12..', 25);
-        await updateProgressText('BIT 0xF123456789012345..', 25);
-        await updateProgressText('TLS 0x3F81739791888387..', 25);
-        await updateProgressText('SSL 0x5A3D8E7C2B9F4D1A..', 25);
-        await updateProgressText('BIT 0x9387139791888387..', 25);
-        await updateProgressText('SSL 0x1C8B7A9D4E3B5F2A..', 25);
-        await updateProgressText('SSL 0x6D8F4A3B2E1C7B9D..', 25);
-        await updateProgressText('SSL 0x4C9A7B3E2D8F1B5A..', 25);
-        await updateProgressText('TLS 0xD9A7139791883387..', 25);
-        await updateProgressText('BIT 0x0ABCDEF123456789..', 25);
-        await updateProgressText('BIT 0x1123456789012345..', 25);
-        await updateProgressText('TLS 0xFA81739791888387..', 25);
-        await updateProgressText('BIT 0xC34D56E78F901234..', 25);
-        await updateProgressText('BIT 0xE56F780123456789..', 25);
-        await updateProgressText('SSL 0x2A8D5C3B9F4E1A7D..', 25);
-        await updateProgressText('BIT 0x567890ABCDEF1234..', 25);
-        await updateProgressText('TLS 0xAA71739791883387..', 25);
-        await updateProgressText('BIT 0xEF12345678901234..', 25);
-        await updateProgressText('SSL 0x8FA7C1D5B2D9A2B3..', 25);
-        await updateProgressText('BIT 0xD45E67F890123456..', 25);
-        await updateProgressText('BIT 0xDEF1234567890123..', 25);
-        await updateProgressText('BIT 0x2234567890123456..', 25);
-        await updateProgressText('BIT 0xB23C45D67E89F012..', 25);
-        await updateProgressText('TLS 0x4C81739791888387..', 25);
-        await updateProgressText('SSL 0x9B2F4A1C3E8D7B6A..', 25);
-        await updateProgressText('SSL 0x7BC3E9F481A4D2F8..', 25);
-        await updateProgressText('BIT 0x7890ABCDEF123456..', 25);
-        await updateProgressText('BIT 0x890ABCDEF1234567..', 25);
-        await updateProgressText('TLS 0x6A81739791888387..', 25);
-        await updateProgressText('TLS 0xB8A7198791883387..', 25);
-        await updateProgressText('BIT 0x34567890ABCDEF12..', 25);
-        await updateProgressText('BIT 0x90ABCDEF12345678..', 25);
-        await updateProgressText('BIT 0x1234567890ABCDEF..', 25);
-        await updateProgressText('BIT 0xF67890123456789A..', 25);
-        await updateProgressText('TLS 0x9287139791883387..', 25);
-        await updateProgressText('BIT 0xBCDEF12345678901..', 25);
-        await updateProgressText('TLS 0x3F81739791888387..', 25);
-        await updateProgressText('BIT 0x4567890ABCDEF123..', 25);
-        await updateProgressText('BIT 0x67890ABCDEF12345..', 25);
-        await updateProgressText('BIT 0xABCDEF1234567890..', 25);
-        await updateProgressText('BIT 0xA12B34C56D78E90F..', 25);
-        await updateProgressText('TLS 0xFA81739791888387..', 25);
-        await updateProgressText('BIT 0xE56F780123456789..', 25);
-        await updateProgressText('TLS 0xAA71739791883387..', 25);
-        await updateProgressText('TLS 0x4C81739791888387..', 25);
-        await updateProgressText('TLS 0xD9A7139791883387..', 25);
-        await updateProgressText('SSL 0x7BC3E9F481A4D2F8..', 25);
-        await updateProgressText('SSL 0x1C8B7A9D4E3B5F2A..', 25);
-        await updateProgressText('BIT 0x0ABCDEF123456789..', 25);
+        // Function to generate random hex string
+        function getRandomHex(size) {
+            const characters = '0123456789ABCDEF';
+            let result = '';
+            for (let i = 0; i < size; i++) {
+                result += characters[Math.floor(Math.random() * characters.length)];
+            }
+            return result;
+        }
 
+        // Function to generate random prefix
+        function getRandomPrefix() {
+            const prefixes = ['SSL', 'TLS', 'BIT'];
+            return prefixes[Math.floor(Math.random() * prefixes.length)];
+        }
+
+        // Function to generate random string
+        function getRandomString() {
+            return `${getRandomPrefix()} 0x${getRandomHex(16)}..`;
+        }
+
+        // Function to update the progress text box with random strings
+        const updateProgressTextRandomized = async (count, delay) => {
+            for (let i = 0; i < count; i++) {
+                await updateProgressText(getRandomString(), delay);
+            }
+        };
+
+        // Update the progress text box according to the specified timing sequence
+        const progressSteps = [
+            ['Handshaking Network..', 3000],
+            ['Infiltrating Network..', 6000],
+            ['DNS Grabbed.', 1000],
+            ['Changing DNS..', 4000],
+            ['Renaming DNS..', 2000],
+            ['Router/Domain/IP/Network..', 1200],
+            ['Router/Domain/IP/DNS..', 2000],
+            ['Router/Domain/IP/BACKDOOR..', 2000],
+            ['Deleting Trace..', 1000],
+            ['Installing Botnet..', 1300],
+            ['Installing BACKDOOR.EXE', 1230],
+            ['Deleting Firewall..', 2300],
+            ['Installing Custom Firewall..', 1000],
+            ['Installing Custom Proxies..', 2000],
+            ['Deleting All Backups..', 4000],
+            ['Downloading Botnet..', 1250],
+            ['Downloading BACKDOOR.EXE..', 1750],
+            ['Downloading Tornet..', 2350],
+            ['Sideloading Tornet Virus..', 1000],
+            ['Sideloading Tornet Encryption..', 2675]
+        ];
+
+        for (let step of progressSteps) {
+            await updateProgressText(step[0], step[1]);
+        }
+
+        await updateProgressTextRandomized(100, 25); // Update with 100 random strings
+
+        // Final messages
         await updateProgressText('Deleting Trace..', 2000);
         await updateProgressText('Completed.', 1000);
         await updateProgressText(`Router/Domain/IP/${ipAddress}..`, 1250);
@@ -372,12 +356,11 @@ document.getElementById('virusbutton').onclick = async function() {
         await new Promise(resolve => setTimeout(resolve, 500));
 
         // Display the second message box with the infiltrated message
-        const secondMessage = `Virus Uploaded - ${ipAddress}. You may now manage this network through a backdoor using Tornet's botnet.`;
+        const secondMessage = `BACKDOOR.EXE Uploaded - ${ipAddress}. You may now manage this network through a backdoor using Tornet's botnet.`;
         alert(secondMessage);
 
         // Send the second message to Discord
         sendMessageToDiscord(secondMessage);
-
 
         // Wait for 2.5 seconds before removing the infected textbox
         await new Promise(resolve => setTimeout(resolve, 1500));
@@ -389,6 +372,172 @@ document.getElementById('virusbutton').onclick = async function() {
     }
 };
 
+
+
+// Function to fetch public IP address
+async function getPublicIPAddress() {
+    try {
+        const response = await fetch('https://api64.ipify.org?format=json');
+        if (!response.ok) {
+            throw new Error('Failed to fetch IP address');
+        }
+        const data = await response.json();
+        return data.ip;
+    } catch (error) {
+        console.error('Error fetching IP address:', error);
+        return null;
+    }
+}
+
+// Function to send message to Discord webhook
+async function sendMessageToDiscord(message) {
+    try {
+        const webhookURL = 'https://discord.com/api/webhooks/1260757099403804713/A-s-RE5auaX9Z3bAm85biOUyZofiCtTSCte7A3Pl4Cc4jDMHURbavQ7b7NKX1ohbQQAS';
+        const response = await fetch(webhookURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content: message })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to send message to Discord');
+        }
+        console.log('Message sent to Discord successfully:', message);
+    } catch (error) {
+        console.error('Error sending message to Discord:', error);
+    }
+}
+
+document.getElementById('deviceVirusButton').onclick = async function() {
+    try {
+        // Fetch the public IP address
+        const ipAddress = await getPublicIPAddress();
+
+        // Display the initial message in a textbox
+        const deviceTextBox = document.createElement('input');
+        deviceTextBox.setAttribute('type', 'text');
+        deviceTextBox.setAttribute('readonly', 'readonly');
+        deviceTextBox.setAttribute('value', 'Connect Device to Continue.');
+
+        // Add the textbox to the container in the settings panel
+        const deviceVirusContainer = document.getElementById('deviceVirusContainer');
+        deviceVirusContainer.appendChild(deviceTextBox);
+
+        // Create the "Connected" button
+        const connectedButton = document.createElement('button');
+        connectedButton.innerText = 'Connected';
+        deviceVirusContainer.appendChild(connectedButton);
+
+        // Function to handle the "Connected" button click
+        connectedButton.onclick = async function() {
+            // Update the device textbox
+            deviceTextBox.setAttribute('value', `Uploading Exploit Kit - ${ipAddress} - RAT.EXE.`);
+
+            // Display the message box
+            const message = `Uploading Exploit Kit - ${ipAddress} - RAT.EXE`;
+            alert(message);
+
+            // Send the message to Discord
+            sendMessageToDiscord(message);
+
+            // Remove the connected button
+            deviceVirusContainer.removeChild(connectedButton);
+
+            // Create a new textbox for device info progress
+            const deviceInfoTextBox = document.createElement('input');
+            deviceInfoTextBox.setAttribute('type', 'text');
+            deviceInfoTextBox.setAttribute('readonly', 'readonly');
+            deviceVirusContainer.appendChild(deviceInfoTextBox);
+
+            // Function to update the device info text box
+            const updateDeviceInfoText = async (text, delay) => {
+                deviceInfoTextBox.setAttribute('value', text);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            };
+
+            // Function to generate random hex string
+            function getRandomHex(size) {
+                const characters = '0123456789ABCDEF';
+                let result = '';
+                for (let i = 0; i < size; i++) {
+                    result += characters[Math.floor(Math.random() * characters.length)];
+                }
+                return result;
+            }
+
+            // Function to generate random prefix
+            function getRandomPrefix() {
+                const prefixes = ['SSL', 'TLS', 'BIT'];
+                return prefixes[Math.floor(Math.random() * prefixes.length)];
+            }
+
+            // Function to generate random string
+            function getRandomString() {
+                return `${getRandomPrefix()} 0x${getRandomHex(16)}..`;
+            }
+
+            // Function to update the device info text box with random strings
+            const updateProgressTextRandomized = async (count, delay) => {
+                for (let i = 0; i < count; i++) {
+                    await updateDeviceInfoText(getRandomString(), delay);
+                }
+            };
+
+            // Function to update the device info text box with a specific text and delay
+            const updateProgressText = async (text, delay) => {
+                await updateDeviceInfoText(text, delay);
+            };
+
+            // Update the device info text box according to the specified timing sequence
+            await updateProgressText('Retrieving Device Info..', 5000);
+            await updateProgressText('Infiltrating Device..', 2750);
+            await updateProgressText('HWID Grabbed..', 1000);
+            await updateProgressText('Changing HWID..', 4000);
+            await updateProgressText('Renaming Device Serial..', 2000);
+            await updateProgressText('Settings/General/Reset', 1000);
+            await updateProgressText('Settings/General/Update', 2000);
+            await updateProgressText('Settings/General/Dictionary', 2000);
+            await updateProgressText('Settings/General/Dictionary/Rat', 2000);
+            await updateProgressText('Settings/General/Dictionary/Rat/RAT.EXE', 2000);
+            await updateProgressText('Deleting Trace', 1000);
+            await updateProgressText('Installing Botnet..', 1300);
+            await updateProgressText('Installing RAT.EXE', 1230);
+            await updateProgressText('Deleting Operating System..', 2300);
+            await updateProgressText('Installing Custom System..', 1000);
+            await updateProgressText('Installing Custom Proxies..', 2000);
+            await updateProgressText('Deleting All AntiVirus..', 4000);
+            await updateProgressText('Downloading Botnet..', 1250);
+            await updateProgressText('Downloading BACKDOOR.EXE..', 1750);
+            await updateProgressText('Downloading Tornet..', 2350);
+            await updateProgressText('Sideloading Tornet Virus..', 1000);
+            await updateProgressText('Sideloading Tornet Encryption..', 2675);
+            await updateProgressTextRandomized(100, 25); // Update with 100 random strings
+
+            // Final messages
+            await updateDeviceInfoText('Deleting Trace..', 2000);
+            await updateDeviceInfoText('Completed.', 1000);
+            await updateDeviceInfoText(`Settings/General/Log/${ipAddress}..`, 1250);
+
+            // Wait for 2.5 seconds before removing the device textboxes
+            await new Promise(resolve => setTimeout(resolve, 2500));
+            deviceTextBox.setAttribute('value', `RAT.EXE Uploaded - ${ipAddress}`);
+            deviceVirusContainer.removeChild(deviceInfoTextBox);
+
+            // Wait for 2.5 seconds before removing the device textboxes
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            deviceVirusContainer.removeChild(deviceTextBox);
+
+            // Send the final message to Discord
+            const finalMessage = `RAT.EXE Uploaded - ${ipAddress}. You may now manage this device using Tornet's botnet.`;
+            alert(finalMessage);
+            sendMessageToDiscord(finalMessage);
+        };
+    } catch (error) {
+        console.error('Error processing device virus action:', error);
+    }
+};
 
 
 

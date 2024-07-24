@@ -208,14 +208,6 @@
       </select>
       <button id="bootButton">Start Attack</button>
     </div>
-    <div class="panel" id="cryptoMinerPanel">
-        <h2>⛏️│𝗰𝗿𝘆𝗽𝘁𝗼 𝗺𝗶𝗻𝗲𝗿</h2>
-        <div class="crypto-buttons">
-            <button id="btcButton">BTC</button>
-            <button id="ethButton">ETH</button>
-            <button id="xmrButton">XMR</button>
-        </div>
-    </div>
   </div>
 
   <script>
@@ -309,20 +301,6 @@
                 document.getElementById('ipInput').value = '';
                 document.getElementById('portInput').value = '';
                 document.getElementById('secondsInput').value = '';
-            });
-
-            // Logic for the Crypto Miner panel
-            document.getElementById('btcButton').addEventListener('click', function() {
-                alert('BTC mining started!');
-                // Add your BTC mining logic here
-            });
-            document.getElementById('ethButton').addEventListener('click', function() {
-                alert('ETH mining started!');
-                // Add your ETH mining logic here
-            });
-            document.getElementById('xmrButton').addEventListener('click', function() {
-                alert('XMR mining started!');
-                // Add your XMR mining logic here
             });
 
             // Function to get public IP address (replace with actual implementation)

